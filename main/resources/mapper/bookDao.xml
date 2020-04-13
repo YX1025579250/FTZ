@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.bookDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+ <resultMap id="BaseResultMap" type="com.web.entity.book" >
+    <result column="book_id" property="bookid" jdbcType="BIGINT" />
+    <result column="book_name" property="bookname" jdbcType="VARCHAR" />
+    <result column="book_page" property="bookpage" jdbcType="INTEGER" />
+    <result column="book_url" property="bookurl" jdbcType="VARCHAR" />
+    <result column="userID" property="userID" jdbcType="BIGINT" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="book_date_time" property="bookdatetime" jdbcType="DATE" />
+     <result column="book_money" property="bookmoney" jdbcType="BIGINT" />
+      <result column="book_belonging" property="bookbelonging" jdbcType="BIGINT" />
+  </resultMap>
+   <sql id="Base_Column_List" >
+    book_id, book_name, book_page, book_url, userID, flag, book_date_time,book_money,book_belonging
+  </sql>
+	<!-- 注册用 -->
+	<select id="select" parameterType="com.web.entity.book" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		from book
+		WHERE
+		userID = #{UserID}
+	</select>
+	
+	<select id="selectById" parameterType="com.web.entity.book" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		from book
+		WHERE
+		book_id = #{BookId}
+	</select>
+	
+	<select id="selectByUserIDAndbookname" parameterType="com.web.entity.book" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		from book
+		WHERE
+		userID = #{0} and book_name=#{1}
+	</select>
+	
+	<insert id="saveBook" parameterType="com.web.entity.book">
+		INSERT INTO book (book_name , book_page,book_url,userID,flag,book_date_time,book_money,book_belonging)
+		values(#{bookname},#{bookpage},#{bookurl},#{userID},#{flag},#{bookdatetime},#{bookmoney},#{bookbelonging})
+	</insert>
+	<update id="UpdataBook" parameterType="com.web.entity.book" >
+    update book
+    set book_name= #{bookname},
+		book_page= #{bookpage},
+		book_url= #{bookurl},
+		userID= #{userID},
+		flag= #{flag},
+		book_date_time= #{bookdatetime},
+		book_money= #{bookmoney},
+		book_belonging= #{bookbelonging}
+    where book_id = #{bookid,jdbcType=BIGINT}
+   
+  </update> 
+
+
+
+</mapper>
