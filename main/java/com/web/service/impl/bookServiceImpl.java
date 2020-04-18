@@ -17,22 +17,31 @@ public class bookServiceImpl implements bookService{
 		// TODO Auto-generated method stub
 		return bookDao.select(UserID);
 	}
+	@Override
 	public book selectById(Long BookId)
 	{
 		return bookDao.selectById(BookId);
 	}
+	@Override
 	public List<book> selectByUserIDAndbookname(Long UserID,String bookname)
 	{
 		return bookDao.selectByUserIDAndbookname(UserID, bookname);
 	}
+	@Override
 	public boolean UpdataBook(book book)
 	{
 		return bookDao.UpdataBook(book);
 	}
+	@Override
 	  //更新book信息
 	public    boolean saveBook(book book) 
 	{
 		return bookDao.saveBook(book);
+	}
+	@Override
+	public book selectByurl(String url) {
+		// TODO Auto-generated method stub
+		return bookDao.selectByurl(url);
 	}
 	
 	    //保存书籍信息

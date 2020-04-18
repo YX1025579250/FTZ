@@ -15,4 +15,6 @@ public interface bookService {
 	  //更新book信息
 	 boolean saveBook(book book) ;
 	  //保存书籍信息
+	//通过url查询book   -刘俊
+	 book selectByurl(String url);
 }

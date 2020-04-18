@@ -17,5 +17,7 @@ public interface bookDao {
     boolean UpdataBook(book book);
     //保存书籍信息
     boolean saveBook(book book) ;
+    //通过url查询book   -刘俊
+    book selectByurl(String url);
 
 }

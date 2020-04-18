@@ -19,14 +19,21 @@ public class bookRecordServiceImpl implements bookRecordService{
 		// TODO Auto-generated method stub
 		return bookrecordDao.bookRecordSelect(bookid);
 	}
+	@Override
 	public boolean UpdataBookRecord(bookRecord bookrecord)
 	{
 		return bookrecordDao.UpdataBookRecord(bookrecord);
 	}
+	@Override
 	  //更新book信息
 	public    boolean saveBookRecord(bookRecord bookrecord) 
 	{
 		return bookrecordDao.saveBookRecord(bookrecord);
+	}
+	@Override
+	public bookRecord bookRecordbyidandpage(Long bookid, int recflage) {
+		// TODO Auto-generated method stub
+		return bookrecordDao.bookRecordbyidandpage(bookid, recflage);
 	}
 	
 	 

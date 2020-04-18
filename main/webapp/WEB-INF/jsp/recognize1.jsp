@@ -19,7 +19,8 @@
 		<header class="header">
 			<p>定位</p>
 		</header>
-
+        <input type="hidden" value="${requestScope.flag}"
+			id="flagpdf" name="flagpdf" />
 		<input type="hidden" value="${requestScope.filename}"
 			id="ChangePhotoName" name="photoname" />
 
@@ -529,7 +530,7 @@ window.onload=function(){
 		$.ajax({
             type:"POST",
             url:"${pageContext.request.contextPath }/download",
-            data: {dat:json,dir:text},
+            data: {dat:json,dir:text,flagpdf:document.getElementById("flagpdf").value},
             success:function(data){
             	if (data='sucess'){download(text1, "dlText.txt", "text/plain");}
             	else{

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,11 +27,17 @@ import org.xml.sax.SAXException;
 import com.web.entity.PhotoRecord;
 import com.web.entity.PhotoWord;
 import com.web.entity.Users;
+import com.web.entity.book;
+import com.web.entity.bookRecord;
+import com.web.entity.bookword;
 import com.web.entity.word;
 import com.web.interceptor.Filemove;
 import com.web.interceptor.SAXWrite;
 import com.web.service.UserService;
 import com.web.service.photorecordService;
+import com.web.service.bookService;
+import com.web.service.bookRecordService;
+import com.web.service.bookwordService;
 import com.web.service.photowordService;
 import com.web.service.wordService;
 import com.web.util.CutBigImage;
@@ -47,6 +54,12 @@ public class mainController {
 	private UserService userService;
 	@Autowired
 	private photorecordService photorecordService;
+	@Autowired
+	private bookService bookService;
+	@Autowired
+	private bookRecordService bookRecordService;
+	@Autowired
+	private bookwordService bookwordService;
 	@Autowired
 	private photowordService photowordService;
 	@Autowired
@@ -161,6 +174,7 @@ public class mainController {
 		model.addAttribute("filename",fileUrl);
 		model.addAttribute("indexValue",indexValue);
 		model.addAttribute("fromList",fromList);
+		model.addAttribute("flag",0);
 		return "recognize1";
 	}
     //登录界面
@@ -202,8 +216,17 @@ public class mainController {
         user.setPassword(password);//写入密码
 		user.setRegDate(regDate);//写入注册日期
 		user.setIsVIP(0);//写入是否VIP标志
+		user.setMoneyWait(0.0);
+		user.setBook(0);
+		user.setPhoto(0);
+		user.setMoney(0.0);
 		boolean flag = userService.saveUser(user);
 		if (flag) {
+			String filepath1=url.dir+"\\"+user.getUserId();
+            File file2=new File(filepath1);		
+            if(!file2.exists()){//如果文件夹不存在		
+            	file2.mkdir();//创建文件夹	
+            	}
 			return "tologin";// 注册成功跳转到登录页面
 		} else
 			return "toregist";// 注册失败留在原页面
@@ -224,9 +247,12 @@ public class mainController {
 		Users u = userService.getUserID(user.getPhonenumber());
 		Long userId = u.getUserId();
 		String ds = request.getParameter("dat");
+		String flagpdf = request.getParameter("flagpdf");
 		String dir = request.getParameter("dir");
 		JSONArray json = JSONArray.fromObject(ds);
 		SAXWrite.savexml(json,dir);
+		if (flagpdf=="0")
+		{		
 		PhotoRecord photorecord=photorecordService.getPhotoRecordID(dir);
 		//更新识别标记为1
 		photorecord.setRecognized(1);
@@ -237,13 +263,34 @@ public class mainController {
 			 jsonOne = json.getJSONObject(i); 
 			 word selectword_id = wordService.selectword_id(String.valueOf(jsonOne.get("word")));
 			 PhotoWord PhotoWord=new PhotoWord();
-			 System.out.println(selectword_id.getWordId());
 			 PhotoWord.setWordId(selectword_id.getWordId());
 			 PhotoWord.setPhotoRecord(photorecord.getRecord());
 			 String wordUrl=new Filemove().filesave((String.valueOf(jsonOne.get("dir"))), String.valueOf(jsonOne.get("word")),userId);
 			 PhotoWord.setWordUrl(wordUrl);
 			 photowordService.savePhotoWord(PhotoWord);
-		 }
+		 }}
+		else{
+			char page=dir.split("\\.")[0].charAt(dir.split("\\.")[0].length()-1);
+			String bookdir=new String(dir.split("//")[0]+"//"+dir.split("//")[1]+"//"+dir.split("//")[2]);
+			book book=bookService.selectByurl(bookdir);
+			
+            bookRecord bookrecord=bookRecordService.bookRecordbyidandpage(book.getBookid(),Integer.valueOf(String.valueOf(page)));
+            Date d=new Date();
+            bookrecord.setRecbookdatetime(d);
+            bookrecord.setRecflag(1);
+            bookRecordService.UpdataBookRecord(bookrecord);
+            JSONObject jsonOne;
+   		 for(int i=0;i<json.size()-1;i++){
+   			 jsonOne = json.getJSONObject(i); 
+   			 word selectword_id = wordService.selectword_id(String.valueOf(jsonOne.get("word")));
+   			 bookword bookword=new bookword();
+   			 bookword.setWordid(selectword_id.getWordId());
+   			 bookword.setRecord(bookrecord.getBookrecord());
+   			 String wordUrl=new Filemove().filesave((String.valueOf(jsonOne.get("dir"))), String.valueOf(jsonOne.get("word")),userId);
+   			 bookword.setWordurl(wordUrl);
+   			 bookwordService.savebookword(bookword);
+   		 }}
 		return "sucess";
 	}
 }
+

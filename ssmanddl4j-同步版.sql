@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 13/04/2020 20:06:55
+ Date: 18/04/2020 11:24:05
 */
 
 SET NAMES utf8mb4;
@@ -35,17 +35,13 @@ CREATE TABLE `book`  (
   INDEX `book_id`(`book_id`) USING BTREE,
   INDEX `user_id`(`userID`) USING BTREE,
   CONSTRAINT `book_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 86 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 150 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of book
 -- ----------------------------
-INSERT INTO `book` VALUES (78, '033001900211_43876908', 1, '033001900211_4387690820200412182903274', 123456, 0, '2020-04-12', 0, 0);
-INSERT INTO `book` VALUES (81, '033001900211_43876908', 1, '033001900211_4387690820200412204947498', 123456, 0, '2020-04-12', 0, 0);
-INSERT INTO `book` VALUES (82, '033001900211_43876908', 1, '033001900211_4387690820200412210405701', 123456, 0, '2020-04-12', 0, 0);
-INSERT INTO `book` VALUES (83, '033001900211_43876908', 1, '033001900211_4387690820200412210421713', 123456, 0, '2020-04-12', 0, 0);
-INSERT INTO `book` VALUES (84, 'Cache_-11cd4f9fa64ca6a2', 0, 'Cache_-11cd4f9fa64ca6a220200412221700777', 123456, 1, '2020-04-12', 0, 0);
-INSERT INTO `book` VALUES (85, '测试', 4, '测试2020041318190325', 123456, 1, '2020-04-13', 0, 0);
+INSERT INTO `book` VALUES (148, '我的测试1', 3, '123470//PDF//12320200417175951800', 123470, 1, '2020-04-17', 12, 1);
+INSERT INTO `book` VALUES (149, '书', 3, '123470//PDF//12320200417202000220', 123470, 0, '2020-04-17', 12, 1);
 
 -- ----------------------------
 -- Table structure for book_record
@@ -61,19 +57,17 @@ CREATE TABLE `book_record`  (
   INDEX `book_id`(`book_id`) USING BTREE,
   INDEX `book_record`(`book_record`) USING BTREE,
   CONSTRAINT `book_record_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 306 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 439 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of book_record
 -- ----------------------------
-INSERT INTO `book_record` VALUES (298, 78, 1, 0, '2020-04-12');
-INSERT INTO `book_record` VALUES (299, 81, 1, 0, '2020-04-12');
-INSERT INTO `book_record` VALUES (300, 82, 1, 0, '2020-04-12');
-INSERT INTO `book_record` VALUES (301, 83, 1, 0, '2020-04-12');
-INSERT INTO `book_record` VALUES (302, 85, 1, 1, '2020-04-13');
-INSERT INTO `book_record` VALUES (303, 85, 2, 1, '2020-04-13');
-INSERT INTO `book_record` VALUES (304, 85, 3, 1, '2020-04-13');
-INSERT INTO `book_record` VALUES (305, 85, 4, 1, '2020-04-13');
+INSERT INTO `book_record` VALUES (433, 148, 1, 1, '2020-04-17');
+INSERT INTO `book_record` VALUES (434, 148, 2, 1, '2020-04-17');
+INSERT INTO `book_record` VALUES (435, 148, 3, 1, '2020-04-17');
+INSERT INTO `book_record` VALUES (436, 149, 1, 0, '2020-04-17');
+INSERT INTO `book_record` VALUES (437, 149, 2, 0, '2020-04-17');
+INSERT INTO `book_record` VALUES (438, 149, 3, 0, '2020-04-17');
 
 -- ----------------------------
 -- Table structure for book_word
@@ -89,7 +83,7 @@ CREATE TABLE `book_word`  (
   INDEX `book_record`(`record`) USING BTREE,
   CONSTRAINT `book_word_ibfk_1` FOREIGN KEY (`word_id`) REFERENCES `word` (`word_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `book_word_ibfk_2` FOREIGN KEY (`record`) REFERENCES `book_record` (`book_record`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for photo_record
@@ -105,18 +99,7 @@ CREATE TABLE `photo_record`  (
   INDEX `userID`(`userID`) USING BTREE,
   INDEX `record`(`record`) USING BTREE,
   CONSTRAINT `photo_record_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 118 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of photo_record
--- ----------------------------
-INSERT INTO `photo_record` VALUES (111, 123456, '2020-04-12', '123456//jpg//sliver20200412183116863.jpg', 1);
-INSERT INTO `photo_record` VALUES (112, 123456, '2020-04-12', '123456//jpg//sliver20200412183906479.jpg', 0);
-INSERT INTO `photo_record` VALUES (113, 123456, '2020-04-12', '123456//jpg//sliver20200412183943507.jpg', 0);
-INSERT INTO `photo_record` VALUES (114, 123456, '2020-04-12', '123456//jpg//sliver20200412185009633.jpg', 0);
-INSERT INTO `photo_record` VALUES (115, 123456, '2020-04-12', '123456//jpg//sliver20200412185135855.jpg', 1);
-INSERT INTO `photo_record` VALUES (116, 123456, '2020-04-12', '123456//jpg//sliver20200412203222312.jpg', 1);
-INSERT INTO `photo_record` VALUES (117, 123456, '2020-04-13', '123456//jpg//sliver20200413181716155.jpg', 1);
+) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for photo_word
@@ -133,118 +116,6 @@ CREATE TABLE `photo_word`  (
   CONSTRAINT `photo_word_ibfk_1` FOREIGN KEY (`word_id`) REFERENCES `word` (`word_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `photo_word_ibfk_2` FOREIGN KEY (`photo_record`) REFERENCES `photo_record` (`record`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 4205 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of photo_word
--- ----------------------------
-INSERT INTO `photo_word` VALUES (4097, 1763, 115, '洞\\20200412185153547.jpg');
-INSERT INTO `photo_word` VALUES (4098, 629, 115, '在\\20200412185153558.jpg');
-INSERT INTO `photo_word` VALUES (4099, 1808, 115, '淆\\20200412185153567.jpg');
-INSERT INTO `photo_word` VALUES (4100, 1847, 115, '溪\\20200412185153578.jpg');
-INSERT INTO `photo_word` VALUES (4101, 146, 115, '何\\20200412185153586.jpg');
-INSERT INTO `photo_word` VALUES (4102, 701, 115, '处\\20200412185153597.jpg');
-INSERT INTO `photo_word` VALUES (4103, 3089, 115, '边\\20200412185153604.jpg');
-INSERT INTO `photo_word` VALUES (4104, 1572, 115, '桃\\20200412185153613.jpg');
-INSERT INTO `photo_word` VALUES (4105, 533, 115, '品\\20200412185153620.jpg');
-INSERT INTO `photo_word` VALUES (4106, 878, 115, '尽\\20200412185153628.jpg');
-INSERT INTO `photo_word` VALUES (4107, 611, 115, '囚\\20200412185153641.jpg');
-INSERT INTO `photo_word` VALUES (4108, 673, 115, '堕\\20200412185153655.jpg');
-INSERT INTO `photo_word` VALUES (4109, 1711, 115, '污\\20200412185153664.jpg');
-INSERT INTO `photo_word` VALUES (4110, 2293, 115, '站\\20200412185153673.jpg');
-INSERT INTO `photo_word` VALUES (4111, 2174, 115, '石\\20200412185153682.jpg');
-INSERT INTO `photo_word` VALUES (4112, 2187, 115, '砾\\20200412185153692.jpg');
-INSERT INTO `photo_word` VALUES (4113, 118, 115, '伍\\20200412185153701.jpg');
-INSERT INTO `photo_word` VALUES (4114, 2061, 115, '畔\\20200412185153711.jpg');
-INSERT INTO `photo_word` VALUES (4115, 3262, 115, '问\\20200412185153717.jpg');
-INSERT INTO `photo_word` VALUES (4116, 1825, 115, '渔\\20200412185153725.jpg');
-INSERT INTO `photo_word` VALUES (4117, 2609, 115, '船\\20200412185153733.jpg');
-INSERT INTO `photo_word` VALUES (4118, 3309, 115, '隐\\20200412185153740.jpg');
-INSERT INTO `photo_word` VALUES (4119, 3309, 115, '隐\\20200412185153746.jpg');
-INSERT INTO `photo_word` VALUES (4120, 3391, 115, '飞\\20200412185153754.jpg');
-INSERT INTO `photo_word` VALUES (4121, 1580, 115, '桥\\20200412185153761.jpg');
-INSERT INTO `photo_word` VALUES (4122, 3310, 115, '隔\\20200412185153769.jpg');
-INSERT INTO `photo_word` VALUES (4123, 3189, 115, '野\\20200412185153776.jpg');
-INSERT INTO `photo_word` VALUES (4124, 1763, 111, '洞\\20200412201921426.jpg');
-INSERT INTO `photo_word` VALUES (4125, 629, 111, '在\\20200412201921439.jpg');
-INSERT INTO `photo_word` VALUES (4126, 1808, 111, '淆\\20200412201921448.jpg');
-INSERT INTO `photo_word` VALUES (4127, 1847, 111, '溪\\20200412201921455.jpg');
-INSERT INTO `photo_word` VALUES (4128, 146, 111, '何\\20200412201921463.jpg');
-INSERT INTO `photo_word` VALUES (4129, 3105, 111, '远\\20200412201921471.jpg');
-INSERT INTO `photo_word` VALUES (4130, 3089, 111, '边\\20200412201921479.jpg');
-INSERT INTO `photo_word` VALUES (4131, 1572, 111, '桃\\20200412201921486.jpg');
-INSERT INTO `photo_word` VALUES (4132, 2630, 111, '花\\20200412201921493.jpg');
-INSERT INTO `photo_word` VALUES (4133, 878, 111, '尽\\20200412201921501.jpg');
-INSERT INTO `photo_word` VALUES (4134, 611, 111, '囚\\20200412201921508.jpg');
-INSERT INTO `photo_word` VALUES (4135, 673, 111, '堕\\20200412201921516.jpg');
-INSERT INTO `photo_word` VALUES (4136, 1711, 111, '污\\20200412201921522.jpg');
-INSERT INTO `photo_word` VALUES (4137, 2293, 111, '站\\20200412201921530.jpg');
-INSERT INTO `photo_word` VALUES (4138, 2174, 111, '石\\20200412201921537.jpg');
-INSERT INTO `photo_word` VALUES (4139, 2187, 111, '砾\\20200412201921546.jpg');
-INSERT INTO `photo_word` VALUES (4140, 3095, 111, '迅\\20200412201921554.jpg');
-INSERT INTO `photo_word` VALUES (4141, 2061, 111, '畔\\20200412201921562.jpg');
-INSERT INTO `photo_word` VALUES (4142, 3262, 111, '问\\20200412201921570.jpg');
-INSERT INTO `photo_word` VALUES (4143, 1825, 111, '渔\\20200412201921578.jpg');
-INSERT INTO `photo_word` VALUES (4144, 2609, 111, '船\\20200412201921588.jpg');
-INSERT INTO `photo_word` VALUES (4145, 3309, 111, '隐\\20200412201921609.jpg');
-INSERT INTO `photo_word` VALUES (4146, 3309, 111, '隐\\20200412201921618.jpg');
-INSERT INTO `photo_word` VALUES (4147, 3391, 111, '飞\\20200412201921624.jpg');
-INSERT INTO `photo_word` VALUES (4148, 1580, 111, '桥\\20200412201921631.jpg');
-INSERT INTO `photo_word` VALUES (4149, 3310, 111, '隔\\20200412201921639.jpg');
-INSERT INTO `photo_word` VALUES (4150, 3189, 111, '野\\20200412201921646.jpg');
-INSERT INTO `photo_word` VALUES (4151, 1770, 116, '派\\20200412203230701.jpg');
-INSERT INTO `photo_word` VALUES (4152, 629, 116, '在\\20200412203230712.jpg');
-INSERT INTO `photo_word` VALUES (4153, 1808, 116, '淆\\20200412203230721.jpg');
-INSERT INTO `photo_word` VALUES (4154, 1847, 116, '溪\\20200412203230729.jpg');
-INSERT INTO `photo_word` VALUES (4155, 3287, 116, '阿\\20200412203230737.jpg');
-INSERT INTO `photo_word` VALUES (4156, 701, 116, '处\\20200412203230745.jpg');
-INSERT INTO `photo_word` VALUES (4157, 3089, 116, '边\\20200412203230754.jpg');
-INSERT INTO `photo_word` VALUES (4158, 1572, 116, '桃\\20200412203230762.jpg');
-INSERT INTO `photo_word` VALUES (4159, 2482, 116, '老\\20200412203230770.jpg');
-INSERT INTO `photo_word` VALUES (4160, 878, 116, '尽\\20200412203230779.jpg');
-INSERT INTO `photo_word` VALUES (4161, 611, 116, '囚\\20200412203230788.jpg');
-INSERT INTO `photo_word` VALUES (4162, 2453, 116, '罐\\20200412203230796.jpg');
-INSERT INTO `photo_word` VALUES (4163, 1771, 116, '流\\20200412203230807.jpg');
-INSERT INTO `photo_word` VALUES (4164, 294, 116, '出\\20200412203230818.jpg');
-INSERT INTO `photo_word` VALUES (4165, 2174, 116, '石\\20200412203230827.jpg');
-INSERT INTO `photo_word` VALUES (4166, 2207, 116, '碳\\20200412203230836.jpg');
-INSERT INTO `photo_word` VALUES (4167, 2753, 116, '虹\\20200412203230843.jpg');
-INSERT INTO `photo_word` VALUES (4168, 2061, 116, '畔\\20200412203230850.jpg');
-INSERT INTO `photo_word` VALUES (4169, 3262, 116, '问\\20200412203230857.jpg');
-INSERT INTO `photo_word` VALUES (4170, 1825, 116, '渔\\20200412203230864.jpg');
-INSERT INTO `photo_word` VALUES (4171, 2603, 116, '般\\20200412203230871.jpg');
-INSERT INTO `photo_word` VALUES (4172, 3309, 116, '隐\\20200412203230879.jpg');
-INSERT INTO `photo_word` VALUES (4173, 3309, 116, '隐\\20200412203230886.jpg');
-INSERT INTO `photo_word` VALUES (4174, 3391, 116, '飞\\20200412203230894.jpg');
-INSERT INTO `photo_word` VALUES (4175, 1593, 116, '梭\\20200412203230901.jpg');
-INSERT INTO `photo_word` VALUES (4176, 3310, 116, '隔\\20200412203230907.jpg');
-INSERT INTO `photo_word` VALUES (4177, 3189, 116, '野\\20200412203230914.jpg');
-INSERT INTO `photo_word` VALUES (4178, 1763, 117, '洞\\20200413181728409.jpg');
-INSERT INTO `photo_word` VALUES (4179, 629, 117, '在\\20200413181728419.jpg');
-INSERT INTO `photo_word` VALUES (4180, 1808, 117, '淆\\20200413181728427.jpg');
-INSERT INTO `photo_word` VALUES (4181, 1847, 117, '溪\\20200413181728436.jpg');
-INSERT INTO `photo_word` VALUES (4182, 146, 117, '何\\20200413181728445.jpg');
-INSERT INTO `photo_word` VALUES (4183, 701, 117, '处\\20200413181728453.jpg');
-INSERT INTO `photo_word` VALUES (4184, 3089, 117, '边\\20200413181728463.jpg');
-INSERT INTO `photo_word` VALUES (4185, 1572, 117, '桃\\20200413181728470.jpg');
-INSERT INTO `photo_word` VALUES (4186, 533, 117, '品\\20200413181728478.jpg');
-INSERT INTO `photo_word` VALUES (4187, 878, 117, '尽\\20200413181728488.jpg');
-INSERT INTO `photo_word` VALUES (4188, 611, 117, '囚\\20200413181728498.jpg');
-INSERT INTO `photo_word` VALUES (4189, 673, 117, '堕\\20200413181728508.jpg');
-INSERT INTO `photo_word` VALUES (4190, 1711, 117, '污\\20200413181728518.jpg');
-INSERT INTO `photo_word` VALUES (4191, 2293, 117, '站\\20200413181728527.jpg');
-INSERT INTO `photo_word` VALUES (4192, 2174, 117, '石\\20200413181728537.jpg');
-INSERT INTO `photo_word` VALUES (4193, 2187, 117, '砾\\20200413181728547.jpg');
-INSERT INTO `photo_word` VALUES (4194, 118, 117, '伍\\20200413181728558.jpg');
-INSERT INTO `photo_word` VALUES (4195, 2061, 117, '畔\\20200413181728567.jpg');
-INSERT INTO `photo_word` VALUES (4196, 3262, 117, '问\\20200413181728576.jpg');
-INSERT INTO `photo_word` VALUES (4197, 1825, 117, '渔\\20200413181728586.jpg');
-INSERT INTO `photo_word` VALUES (4198, 2609, 117, '船\\20200413181728594.jpg');
-INSERT INTO `photo_word` VALUES (4199, 3309, 117, '隐\\20200413181728604.jpg');
-INSERT INTO `photo_word` VALUES (4200, 3309, 117, '隐\\20200413181728613.jpg');
-INSERT INTO `photo_word` VALUES (4201, 3391, 117, '飞\\20200413181728623.jpg');
-INSERT INTO `photo_word` VALUES (4202, 1580, 117, '桥\\20200413181728630.jpg');
-INSERT INTO `photo_word` VALUES (4203, 3310, 117, '隔\\20200413181728637.jpg');
-INSERT INTO `photo_word` VALUES (4204, 3189, 117, '野\\20200413181728645.jpg');
 
 -- ----------------------------
 -- Table structure for reply
@@ -264,17 +135,6 @@ CREATE TABLE `reply`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of reply
--- ----------------------------
-INSERT INTO `reply` VALUES (1, 123456, 1, '2020-03-28 22:01:58', '测试数据测试数据测试数据');
-INSERT INTO `reply` VALUES (2, 123456, 1, '2020-03-28 22:01:59', '测试数据测试数据测试数据');
-INSERT INTO `reply` VALUES (3, 123456, 1, '2020-03-28 22:02:02', '测试数据');
-INSERT INTO `reply` VALUES (4, 123456, 1, '2020-03-28 22:02:03', '测试数据');
-INSERT INTO `reply` VALUES (5, 123456, 1, '2020-03-28 22:02:04', '测试数据');
-INSERT INTO `reply` VALUES (6, 123456, 1, '2020-03-28 22:02:07', '测试数据');
-INSERT INTO `reply` VALUES (7, 123456, 1, '2020-04-12 14:06:45', '测试数据测试数据');
-
--- ----------------------------
 -- Table structure for resource
 -- ----------------------------
 DROP TABLE IF EXISTS `resource`;
@@ -290,13 +150,6 @@ CREATE TABLE `resource`  (
   INDEX `resource_ibfk_1`(`userId`) USING BTREE,
   CONSTRAINT `resource_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of resource
--- ----------------------------
-INSERT INTO `resource` VALUES (1, 123456, '2020-03-28 22:01:03', '测试数据', '测试数据', '测试数据', 0);
-INSERT INTO `resource` VALUES (2, 123456, '2020-03-28 23:50:25', '测试数据', '测试数据', '测试数据', 0);
-INSERT INTO `resource` VALUES (3, 123456, '2020-03-28 23:50:39', '测试数据', '测试数据', '测试数据', 0);
 
 -- ----------------------------
 -- Table structure for users
@@ -320,13 +173,13 @@ CREATE TABLE `users`  (
   PRIMARY KEY (`userID`, `phonenumber`) USING BTREE,
   UNIQUE INDEX `userID`(`userID`) USING BTREE,
   UNIQUE INDEX `phonenumber`(`phonenumber`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 123465 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 123472 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (12345, '12345', '12345', '2020-04-01', 0, 30, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `users` VALUES (123456, '12345', '13766487770', '2019-11-03', 1, 40, 0.8, 6, 7, 0, 1, 12, '121', '12');
+INSERT INTO `users` VALUES (123470, '000000', '000001', '2020-04-17', 0, 0, 0, 2, 0, 0, 1, 12, '刘', '0');
+INSERT INTO `users` VALUES (123471, '123456', '123456', '2020-04-17', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for word
@@ -3849,6 +3702,17 @@ UPDATE users
 set book = (SELECT count(*) as book from book where userID=(SELECT userID from book where book_id=new.book_id))
 WHERE userID=(SELECT userID from book where book_id=new.book_id);
 END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table book_record
+-- ----------------------------
+DROP TRIGGER IF EXISTS `qwe`;
+delimiter ;;
+CREATE TRIGGER `qwe` AFTER UPDATE ON `book_record` FOR EACH ROW begin
+update book set flag=1 where (select count(*) from book_record where book_id=new.book_id and rec_flag=0) =0 and book_id=old.book_id;
+end
 ;;
 delimiter ;
 

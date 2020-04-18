@@ -53,7 +53,7 @@
 		userID = #{userId}
 	</select>
 	<!-- 注册用 -->
-	<insert id="saveUser" parameterType="com.web.entity.Users">
+	<insert id="saveUser" parameterType="com.web.entity.Users" useGeneratedKeys="true" keyProperty="userId">
 		INSERT INTO users (phonenumber , password,regDate,isVIP,sex,age,name,occupation)
 		values(#{phonenumber},#{password},#{regDate},#{isVIP},#{sex},#{age},#{name},#{occupation})
 	</insert>

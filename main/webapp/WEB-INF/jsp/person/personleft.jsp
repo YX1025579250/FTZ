@@ -59,8 +59,8 @@ body {
 			<a href="${pageContext.request.contextPath }/searchChar" target="mainFrame" onFocus="this.blur()">查找文字来源</a>
 		</div>
 		<div>
-			<span>任务管理</span> <a href="main.html" target="mainFrame"
-				onFocus="this.blur()">任务主页/领取</a> <a href="main_list.html"
+			<span>任务管理</span> <a href="pdfrenwu" target="mainFrame"
+				onFocus="this.blur()">任务发布/领取</a> <a href="main_list.html"
 				target="mainFrame" onFocus="this.blur()">我的任务/管理</a> <a
 				href="main_info.html" target="mainFrame" onFocus="this.blur()">任务发布</a>
 		</div>

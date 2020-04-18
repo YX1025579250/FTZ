@@ -12,5 +12,7 @@ public interface bookRecordService {
 	  //更新书籍中单个图片bookRecord信息
 	 boolean saveBookRecord(bookRecord bookrecord) ;
 	    //保存书籍中单个图片bookRecord信息
+	 bookRecord bookRecordbyidandpage(Long bookid,int recflage);
+	    //通过id和当前页数查询bookrecord--刘俊
 	  
 }

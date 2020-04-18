@@ -36,7 +36,7 @@ public class PDF2IMAGE {
 
 	 */
 
-	public static int pdf2Image(String PdfFilePath, String dstImgFolder, String res,int dpi) {
+	public static int pdf2Image(String PdfFilePath, String dstImgFolder, String res,int dpi,String name) {
 		
 //		createDirectory(dstImgFolder);//创建需要用的文件夹
 
@@ -65,7 +65,7 @@ public class PDF2IMAGE {
 
 			}
 
-			String imgnewname=imagePDFName.substring(0,imagePDFName.indexOf(res));
+			String imgnewname=name;
 
 			if (createDirectory(imgFolderPath)) {
 
