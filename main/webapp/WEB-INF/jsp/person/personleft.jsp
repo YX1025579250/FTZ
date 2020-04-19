@@ -65,9 +65,10 @@ body {
 				href="main_info.html" target="mainFrame" onFocus="this.blur()">任务发布</a>
 		</div>
 		<div>
-			<span>留言管理</span> <a href="main.html" target="mainFrame"
-				onFocus="this.blur()">我的留言/回复</a> <a href="main_list.html"
-				target="mainFrame" onFocus="this.blur()">我的留言管理</a>
+			<span>留言管理</span> 
+				<a href="personreply?page=1&size=10" target="mainFrame" onFocus="this.blur()">我的留言/回复</a> 
+				<a href="personfeedback?page=1&size=10" target="mainFrame" onFocus="this.blur()">我的反馈</a>
+				<a href="addfeedback" target="mainFrame" onFocus="this.blur()">反馈</a>
 		</div>
 	</div>
 </body>

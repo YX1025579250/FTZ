@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>繁体字智能识别平台</title>
 <link rel="stylesheet" type="text/css" href="Assets/css/reset.css" />
-<script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="Assets/js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript"
 	src="Assets/plugins/FlexSlider/jquery.flexslider.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -54,13 +54,13 @@ $(function() {
 		<div class="slider">
 			<div class="flexslider">
 				<ul class="slides">
-					<li><a href=""><img src="Assets/upload/banner_a.jpg"
+					<li><a href=""><img src="Assets/upload/banner_a.png"
 							alt="古代文献扫一扫\获取简体字" /></a>
 							</li>
-					<li><a href=""><img src="Assets/upload/banner_b.jpg"
+					<li><a href=""><img src="Assets/upload/banner_b.png"
 							alt="" /></a>
 							</li>
-					<li><a href=""><img src="Assets/upload/banner_c.jpg"
+					<li><a href=""><img src="Assets/upload/banner_c.png"
 							alt="" /></a>
 							</li>
 				</ul>
@@ -70,25 +70,25 @@ $(function() {
 	<!--幻灯片-->
 	<!--主体盒子-->
 		 
-		 <div class="banner">
+	 <div class="banner">
 		<div class="main">
-		 <div class="quarter-div green"> 
-       <img src="Assets/images/banne1.png">
+		 	<div class="quarter-div green"> 
+		       <img src="Assets/images/banne1.png">
 			</div>
 			<div class="quarter-div green"> 
-       <img src="Assets/images/banne2.png" >
+		       <img src="Assets/images/banne2.png" >
 			</div>	 
-    </div>
+	    </div>
 	</div>
-        <div class="banner">
+    <div class="banner">
 		<div class="main">
 			<div class="quarter-div blue"> 
-       <img src="Assets/images/banne3.png">
+	       		<img src="Assets/images/banne3.png">
 			</div>	
 			<div class="quarter-div blue"> 
-       <img src="Assets/images/banne4.png">
+	       		<img src="Assets/images/banne4.png">
 			</div>	 
-    </div>
+    	</div>
 	</div>
 
 

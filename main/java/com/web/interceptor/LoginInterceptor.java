@@ -20,6 +20,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if(user!=null) {
 			return true;
 		}
+		String url = request.getRequestURI().split("/")[2];
+		session.setAttribute("preurl", url);
 		request.setAttribute("msg", "请先登录！");
 		request.getRequestDispatcher("/WEB-INF/jsp/tologin.jsp").forward(request, response);
 		return false;

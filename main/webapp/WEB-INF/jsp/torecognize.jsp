@@ -24,7 +24,7 @@
 
 		<form action="${pageContext.request.contextPath }/fileupload"
 			method="post" enctype="multipart/form-data">
-			<input id="file_upload" type="file" name="file" /> <input
+			<input id="file_upload" type="file" name="file" value="选择" /> <input
 				type="submit" name="识别">
 			<div class="image_container">
 				<img id="preview" width="600" height="600">

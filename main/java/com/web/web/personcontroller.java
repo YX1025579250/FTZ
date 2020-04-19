@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -20,12 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.web.entity.PhotoRecord;
 import com.web.entity.PhotoWord;
+import com.web.entity.Reply;
 import com.web.entity.Users;
 import com.web.service.UserService;
 import com.web.service.photorecordService;
 import com.web.service.photowordService;
+import com.web.service.replyService;
 import com.web.service.wordService;
 import com.web.util.XmlToJson;
 
@@ -39,6 +43,8 @@ public class personcontroller {
 	private wordService wordService;
 	@Autowired
 	private photowordService photoWordService;
+	@Autowired
+	private replyService rservice;
 
 	@RequestMapping("/personmain")
 	public String personmain() {
@@ -288,5 +294,60 @@ public class personcontroller {
 		Integer recognized = photorecordService.selectRecognizedByUrl(recordUrl);
 		//之前的脏数据recognized字段为null
 		return recognized==null?0:recognized;
+	}
+	@RequestMapping("/personreply")
+	public String personreply(HttpSession session,HttpServletRequest request,int page,int size){
+		Users user = (Users) session.getAttribute("user");
+		Users u = userService.getUserID(user.getPhonenumber());
+		Long userId = u.getUserId();
+		System.out.println("userId:"+userId);
+		List<Reply> list = rservice.getReplys(userId,page,size);
+		PageInfo pageInfo = new PageInfo(list);
+		request.setAttribute("pageInfo", pageInfo);
+		return "person/topersonReply";
+	}
+	@RequestMapping("replydelete")
+	public void replydelete(HttpSession session,HttpServletRequest request,HttpServletResponse response,Long replyId) throws Exception{
+		rservice.deleteReply(replyId);
+		request.getRequestDispatcher("/personreply?page=1&size=10").forward(request, response);
+		return;
+	}
+	
+	@RequestMapping("/personfeedback")
+	public String personfeedback(HttpSession session,HttpServletRequest request,int page,int size){
+		Users user = (Users) session.getAttribute("user");
+		Users u = userService.getUserID(user.getPhonenumber());
+		Long userId = u.getUserId();
+		System.out.println("userId:"+userId);
+		List<Reply> list = rservice.getFeedbacks(userId,page,size);
+		PageInfo pageInfo = new PageInfo(list);
+		request.setAttribute("pageInfo", pageInfo);
+		return "person/tofeedback";
+	}
+	
+	@RequestMapping("feedbackdelete")
+	public void feedbackdelete(HttpSession session,HttpServletRequest request,HttpServletResponse response,Long replyId) throws Exception{
+		rservice.deleteFeedback(replyId);
+		request.getRequestDispatcher("/personfeedback?page=1&size=10").forward(request, response);
+		return;
+	}
+	
+	@RequestMapping("/addfeedback")
+	public String addfeedback() {
+		return "person/feedback";
+	}
+	
+	@RequestMapping("/addfeedback2")
+	public void addfeedback2(HttpServletRequest request,HttpServletResponse response,HttpSession session,String phonenumber,Long resourceId,String replyContent) throws Exception{
+		Users u = userService.getUserID(phonenumber);
+		Long userId = u.getUserId();
+		replyContent = new String(replyContent.getBytes("ISO-8859-1"), "UTF-8");
+		Reply reply = new Reply();
+		reply.setUserId(userId);
+		reply.setResourceId(resourceId);
+		reply.setReplyContent(replyContent);
+		rservice.addReply(reply);
+		request.getRequestDispatcher("/personfeedback?page=1&size=10").forward(request, response);
+		return; 
 	}
 }

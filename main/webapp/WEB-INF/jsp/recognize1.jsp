@@ -15,6 +15,16 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
+<div id="doing" >
+        <div id="div1">
+            <table  align="center" valign="middle" style="FILTER: Alpha(Opacity=0); WIDTH: 300px; HEIGHT: 150px; margin:auto; vertical-align:middle;">
+                <tr align="center" valign="middle">
+                    <td width="40%"><img src="Assets/images/wait.gif" /></td>
+                    <td width="60%" style="color:white; text-align:left;font-size:32px;">请等待...</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 	<div class="main clearfix">
 		<header class="header">
 			<p>定位</p>
@@ -22,6 +32,7 @@
 
 		<input type="hidden" value="${requestScope.filename}"
 			id="ChangePhotoName" name="photoname" />
+		
 
 		<div class="col-xs-6 maxHeight" style="background-color: #f2f7f2">
 			<div class="center_img_div" overflow-y=‘hidden’>
@@ -90,6 +101,8 @@ changeSrc();
         img.src = $('#topImg').attr('src')
         img.onload = function () {
             //xli = deletePx($('#topImg').css('width')) / img.width
+            console.log("width:", $('#topImg').css('width'))
+            console.log("height:", $('#topImg').css('width'))
             xli = deletePx($('#topImg').css('width')) / img.width
             yli = deletePx($('#topImg').css('height')) / img.height
             console.log(deletePx($('#biaodiv').css('width')), img.width)
@@ -450,8 +463,17 @@ function moveDiv(id, width, height){
     /**
      * 保存数据
      * */
+    function fun1(){
+    	    var x = document.getElementById("doing") ;
+    	    x.style.display="block";
+    	}
+    function fun2(){
+    	    var x = document.getElementById("doing") ;
+    	    x.style.display="none";
+    	}
     function save() {
         var json = [];
+        fun1() ;
         $('#rightContentbody tr').each(function (index) {
             var w = $(this).children('td').eq(0).html()
             var h = $(this).children('td').eq(1).html()
@@ -476,26 +498,29 @@ function moveDiv(id, width, height){
         obj.src = $('#topImg').attr('src')
         json.push(obj)
         json = JSON.stringify(json) 
+        console.log("json:", json) ;
         $.ajax({
             type:"POST",
             url:"${pageContext.request.contextPath }/recognize2",
             data: {ds:json},
            
             success:function(json){
+            	fun2() ;
             	var c2 = document.getElementById("c2");
                 var context2 = c2.getContext("2d");
                 alert("识别完成");
                 context2.clearRect(0,0,600,580)
-                context2.font = ("25px" + " Arial");		
+                context2.font = ("25px" + " Arial");
+                /* context2.font = json[0].height*xli + "px Arial" ; */
                 for (var k=0;k<json.length;k++)
-                context2.fillText(json[k].word,json[k].x*xli,(json[k].y)*yli);
+                	context2.fillText(json[k].word,json[k].x*xli,(json[k].y+22)*yli);	//与字体大小有关，比字体小5px
                 jsonlist=json;
             }
         });
     }
 window.onload=function(){
     	var c2 = document.getElementById("c2");
-    c2.onclick =function (evt){
+    	c2.onclick =function (evt){
   	     var x = evt.pageX - $('#c2').offset().left;
          var y = evt.pageY - $('#c2').offset().top;
          var context2 = c2.getContext("2d");
@@ -506,8 +531,10 @@ window.onload=function(){
                  change = prompt("您正在修改" + jsonlist[t].word);
                  if (change != null)
               	   jsonlist[t].word = change;
+                 context2.fillStyle="red" ;
+                 /* context2.fillRect(jsonlist[t].x * xli,jsonlist[t].y * yli,jsonlist[t].width * xli,jsonlist[t].height * yli) */
                  context2.clearRect((jsonlist[t].x * xli) ,(jsonlist[t].y * yli) ,jsonlist[t].width * xli, jsonlist[t].height * yli);
-                 context2.fillText(jsonlist[t].word,jsonlist[t].x * xli,json[k].y * yli);
+                 context2.fillText(jsonlist[t].word,jsonlist[t].x * xli, (jsonlist[t].y+22) * yli);
              }
          }
       }

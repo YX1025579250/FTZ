@@ -28,8 +28,20 @@ public class replyServiceImpl implements replyService{
 		rdao.deleteReply(replyId);
 	}
 	@Override
-	public void addReply(Long userId, Long resourceId, String replyContent) {
+	public void addReply(Reply reply) {
 		// TODO Auto-generated method stub
-		rdao.addReply(userId, resourceId, replyContent);
+		rdao.addReply(reply);
+	}
+	@Override
+	public List<Reply> getFeedbacks(Long userId, int page, int size) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(page, size);
+		List<Reply> list = rdao.getFeedbacks(userId);
+		return list;
+	}
+	@Override
+	public void deleteFeedback(Long replyId) {
+		// TODO Auto-generated method stub
+		rdao.deleteReply(replyId);
 	}
 }

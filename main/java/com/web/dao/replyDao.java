@@ -13,6 +13,7 @@ public interface replyDao {
 	 */
 	List<Reply> getReplys(Long userId);
 	void deleteReply(Long replyId);
-	List<Reply> getReplysbyRid(Long userId);
-	void addReply(Long userId,Long resourceId,String replyContent);
+	List<Reply> getReplysbyRid(Long resourceId);
+	void addReply(Reply reply);
+	List<Reply> getFeedbacks(Long userId);
 }

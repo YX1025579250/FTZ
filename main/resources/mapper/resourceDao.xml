@@ -7,13 +7,18 @@
 
 	<!-- 注册用 -->
 	<select id="getResources" resultType="Resource">
-		select * from resource 
+		select * from resource where resourceId > 0
 	</select>
 	
 	<select id="getResource" resultType="Resource">
 		select * from resource where resourceId = #{resourceId}
 	</select>
 	<select id="getResourcesBykw" resultType="Resource">
-		select * from resource where resourceName like #{keyword}
+		select * from resource where resourceName like #{keyword} and resourceId > 0
 	</select>
+	
+	<insert id="addResource" parameterType="Resource">
+		insert into resource(userId,resourceName,resourceDescription,resourceUrl,resourceCredit)
+		values(#{userId},#{resourceName},#{resourceDescription},#{resourceUrl},#{resourceCredit})
+	</insert>
 </mapper>

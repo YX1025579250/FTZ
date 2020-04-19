@@ -15,7 +15,7 @@
 	href="Assets/plugins/FlexSlider/flexslider.css">
 <script type="text/javascript" src="Assets/js/js_z.js"></script>
 <link rel="stylesheet" type="text/css" href="Assets/css/thems.css">
-<link rel="stylesheet" href="Assets/layui/css/layui.css"  media="all">
+<link rel="stylesheet" href="layui/css/layui.css"  media="all">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
  	<table class="layui-hide" id="reply" lay-filter="reply"></table>
  
 	<script type="text/html" id="barDemo">
- 		 <a class="layui-btn layui-btn-xs" lay-event="edit">下载</a>
+ 		 <a class="layui-btn layui-btn-xs" lay-event="download">下载</a>
 	</script>
     
     <form class="layui-form layui-form-pane" action="${pageContext.request.contextPath }/addreply" lay-filter="form1">           
@@ -41,8 +41,8 @@
   		<div class="layui-form-item">
     		<div class="layui-input-block">
       			<button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-    	</div>
-  </div>   
+    		</div>
+  		</div>   
   	</form>   
 <script src="layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -57,7 +57,7 @@ layui.use('table', function(){
     ,cols: [[
       {field:'resourceName', title: '资源名称',width:300}
       ,{field:'resourceDescription', title: '资源描述'}
-      ,{field:'userID', title: '上传者', width:150}
+      ,{field:'userId', title: '上传者', width:150}
       ,{field:'resourceDatestr', title: '上传时间', width:200}
       ,{field:'resourceCredit', title: '所需积分', width:100}
       ,{field:'resourceId', title: '资源ID',hide:true}
@@ -92,14 +92,11 @@ layui.use('table', function(){
 	  });
   
 //监听行工具事件
-  table.on('tool(test)', function(obj){
+  table.on('tool(resource)', function(obj){
     var data = obj.data;
     //console.log(obj)
-    if(obj.event === 'del'){
-      layer.confirm('真的删除行么', function(index){
-        obj.del();
-        layer.close(index);
-      });
+    if(obj.event === 'download'){
+      window.location.href="resourcedownload?resourceId="+data.resourceId;
     } 
   });
   
@@ -112,9 +109,6 @@ layui.use('form', function(){
 	    });
 	//监听提交
 	form.on('submit(demo1)', function(data){
-	  layer.alert(JSON.stringify(data.field), {
-	    title: '最终的提交信息'
-	  })
 	  return true;
 	});
 });

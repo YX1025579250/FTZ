@@ -48,4 +48,14 @@ public class resourceServiceImpl implements resourceService{
 		return list;
 	}
 
+	@Override
+	public boolean addResource(Resource resource) {
+		// TODO Auto-generated method stub
+		if(rdao.addResource(resource)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 }

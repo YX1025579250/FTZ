@@ -5,7 +5,7 @@ import com.web.util.DateUtils;
 
 public class Resource {
 	private Long resourceId;
-	private Long userID;
+	private Long userId;
 	private Date resourceDate;
 	private String resourceDatestr;
 	private String resourceName;
@@ -24,11 +24,11 @@ public class Resource {
 	public void setResourceId(Long resourceId) {
 		this.resourceId = resourceId;
 	}
-	public Long getUserID() {
-		return userID;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUserID(Long userID) {
-		this.userID = userID;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	public Date getResourceDate() {
 		return resourceDate;
@@ -65,7 +65,7 @@ public class Resource {
 	}
 	@Override
 	public String toString() {
-		return "Resource [resourceId=" + resourceId + ", userID=" + userID + ", resourceDate=" + resourceDate
+		return "Resource [resourceId=" + resourceId + ", userID=" + userId + ", resourceDate=" + resourceDate
 				+ ", resourceDatestr=" + resourceDatestr + ", resourceName=" + resourceName + ", resourceUrl="
 				+ resourceUrl + ", resourceDescription=" + resourceDescription + ", resourceCredit=" + resourceCredit
 				+ "]";

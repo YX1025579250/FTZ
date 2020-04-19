@@ -15,7 +15,7 @@
 	href="Assets/plugins/FlexSlider/flexslider.css">
 <script type="text/javascript" src="Assets/js/js_z.js"></script>
 <link rel="stylesheet" type="text/css" href="Assets/css/thems.css">
-<link rel="stylesheet" href="Assets/layui/css/layui.css"  media="all">
+<link rel="stylesheet" href="layui/css/layui.css"  media="all">
 </head>
 <%@ include file="head.jsp"%>
 <body height="800px">
@@ -27,6 +27,7 @@
     <input class="layui-input" name="id" id="demoReload" autocomplete="off">
   </div>
   <button class="layui-btn" data-type="reload">搜索</button>
+  <a href="${pageContext.request.contextPath }/resourceupload" class="layui-btn">上传资源</a>
 </div>
  
 <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table> 
@@ -44,7 +45,7 @@ layui.use('table', function(){
     ,url: baseurl+'/resource2'
     ,cols: [[
       {field:'resourceName', title: '资源名称',fixed:true}
-      ,{field:'userID', title: '上传者', width:150}
+      ,{field:'userId', title: '上传者', width:150}
       ,{field:'resourceDatestr', title: '上传时间', width:200}
       ,{field:'resourceCredit', title: '所需积分', width:100}
       ,{field:'resourceId', title: '资源ID',hide:true}
@@ -59,7 +60,7 @@ layui.use('table', function(){
   	  }
     ,id: 'testReload'
     ,page: true
-    ,height: 310
+    ,height: 500
   });
   
   var $ = layui.$, active = {

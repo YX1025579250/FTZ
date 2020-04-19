@@ -48,15 +48,16 @@ public class ImageSplit {
         	posepoint point=new posepoint();
         	point.setX((int)(Float.parseFloat((String)jsonOne.get("x"))/xli));
         	point.setY((int)(Float.parseFloat((String)jsonOne.get("y"))/yli));
-        	point.setWidth((int)(Float.parseFloat((String)jsonOne.get("width"))/xli));
-        	point.setHeight((int)(Float.parseFloat((String)jsonOne.get("height"))/yli));
+        	point.setWidth((int)(Float.parseFloat((String)jsonOne.get("width"))/xli)+1);
+        	point.setHeight((int)(Float.parseFloat((String)jsonOne.get("height"))/yli)+1);
         	totalmap.add(point);
 	 }
         Collections.sort(totalmap, new SortX());
+        
         /*SAXWrite.savexml(totalmap,originalImg.split("\\.")[0]+".xml");*/
         for (int h=0;h<totalmap.size();h++){
         	imgs[count] = new BufferedImage(totalmap.get(h).getWidth(),totalmap.get(h).getHeight(), image.getType());
-            Graphics2D gr = imgs[count++].createGraphics();
+        	Graphics2D gr = imgs[count++].createGraphics();
             gr.drawImage(image, 0, 0, totalmap.get(h).getWidth(),totalmap.get(h).getHeight(),totalmap.get(h).getX(),totalmap.get(h).getY(),
             		totalmap.get(h).getWidth()+totalmap.get(h).getX(),totalmap.get(h).getY()+totalmap.get(h).getHeight(), null);
             gr.dispose(); 

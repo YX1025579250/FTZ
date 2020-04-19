@@ -2,7 +2,7 @@ $(function(){
 	//幻灯片
 	var w_width=$(window).width();
 	var w_banner=(1920-w_width)/2;
-	$('.flexslider .slides img').css('margin-left','-'+w_banner+'px');
+	/*$('.flexslider .slides img').css('margin-left','-'+w_banner+'px');*/
 	$('.banner_s img').css('margin-left','-'+w_banner+'px');
 	
 	$('.i_mainb .box dl:nth-child(5n)').css('margin-right',0+'px');

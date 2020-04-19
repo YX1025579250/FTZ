@@ -7,7 +7,7 @@
 
 	<!-- 注册用 -->
 	<select id="getReplys" parameterType="java.lang.Long" resultType="Reply">
-		select * from Reply where userId = #{userId}
+		select * from Reply where userId = #{userId} and resourceId > 0
 	</select>
 	
 	<update id="deleteReply" parameterType="java.lang.Long">
@@ -22,4 +22,9 @@
 		insert into reply(userId,resourceId,replyContent)
 		values(#{userId},#{resourceId},#{replyContent})
 	</insert>
+	
+	<select id="getFeedbacks" parameterType="java.lang.Long" resultType="Reply">
+		select * from Reply where userId = #{userId} and resourceId=0
+	</select>
+	
 </mapper>
