@@ -13,20 +13,16 @@
 	rel="stylesheet">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<style>
-		/* 在个人中心进行识别时高度溢出，看不到识别和下载按钮，所以在底部加了100px高度的div代替溢出 */
-		#uselessDiv{
-			height:100px;
-		}
-	</style>
 </head>
 <body>
 	<div class="main clearfix">
 		<header class="header">
 			<p>定位</p>
 		</header>
-        <input type="hidden" value="${requestScope.flag}"
+		<!-- 刘俊学长的更新 -->
+		 <input type="hidden" value="${requestScope.flag}"
 			id="flagpdf" name="flagpdf" />
+			
 		<input type="hidden" value="${requestScope.filename}"
 			id="ChangePhotoName" name="photoname" />
 
@@ -79,13 +75,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="uselessDiv">
-	<h4><b>说明：</b></h4>
-	<p>使用鼠标对红框进行调整；</p>
-	<p>点击“识别”，等待系统出现提示后点击“确定”；</p>
-	<p>使用鼠标对识别后的文字进行修改</p>
-	<p>点击“下载”，下载txt识别文件。</p>
-	</div>
+	 <script type="text/javascript" src="Assets/js/html2canvas.js"></script>
 	<script src="Assets/js/jquery-3.0.0.min.js"></script>
 	<script src="Assets/js/layui.js"></script>
 	<script src="Assets/js/download.js"></script>
@@ -530,6 +520,50 @@ window.onload=function(){
     } 
     var btn = document.getElementById("btn");
     btn.onclick = function ()  {
+    	
+    	
+    	///添加截取识别之后的文字图片。
+    	/* var oCavans = document.getElementsByTagName('canvas')[0];
+        var strDataURI = oCavans.toDataURL();
+          
+          var link = document.createElement('a');
+         link.innerHTML = 'download_canvas_image';
+          link.download = 'mypainting.png';
+          link.href = strDataURI;
+         link.addEventListener('click', function(ev) {
+              link.href = strDataURI;
+          }, false);
+          document.body.appendChild(link);*/
+          
+          var oCavans = document.getElementsByTagName('canvas')[0];
+          var myImage = oCavans.toDataURL();
+          
+         /**
+           var link = document.createElement('a');
+         link.innerHTML = 'download_canvas_image';
+          link.download = 'mypainting.png';
+          link.href = myImage;
+          document.body.appendChild(link);*/
+       // 返回一个包含PNG图片的<img>元素
+        //  var oImgPNG = Canvas2Image.saveAsPNG(oCanvas, true);  
+        /*
+          var oCavans = document.getElementsByTagName('canvas')[0];
+          var myImage = oCavans.toDataURL();
+        */
+    	//var canvas=document.getElementById("c2");
+    	//var myImage = canvas.toDataURL("image/jpeg");  
+                        //并将图片上传到服务器用作图片分享  
+         $.ajax({  
+             type : "POST",  
+             url : "${pageContext.request.contextPath }/saveSBphoto",  
+             data : {"myImage":myImage,"URL":document.getElementById("ChangePhotoName").value},  
+             timeout : 60000,  
+             success : function(data){  
+             	alert("发送识别出的照片到后台成功");
+             }  
+         }); 
+
+    	///下面都是原来的下载代码
     	var json=[]
     	json=jsonlist
     	json = JSON.stringify(json) 
@@ -547,21 +581,13 @@ window.onload=function(){
             	if (data='sucess'){download(text1, "dlText.txt", "text/plain");}
             	else{
             	download(text1, "dlText.txt", "text/plain");}
-				if("${fromList}"==null){
-            		
-            	} else if("${fromList}"=="photoList"){//识别请求从用户查看图片发出，跳回到图片列表界面
-            		window.location.href="${pageContext.request.contextPath }/personalPhotoList?indexValue="
-            			+ "${indexValue}";	
-            	} else if("${fromList}"=="pdfPhotoList"){//识别请求从用户查看书籍图片发出，跳回到书籍图片列表界面
-            		console.log("*****************"+"${indexValue}");
-            		window.location.href="${pageContext.request.contextPath }/pdfDetail?indexValue="
-            			+ "${indexValue}" + "&bookId=" + "${bookId}";	
-            	}
             }
         });
 			
 		}
     
+   
+   
    
  
 /*     */

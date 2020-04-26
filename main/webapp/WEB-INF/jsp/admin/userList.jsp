@@ -13,12 +13,6 @@
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 <link rel="stylesheet" href="layui/css/layui.css" media="all">
 <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-<style>
-.layui-table-cell{
-      display:table-cell;
-      vertical-align: middle;
-  }
-</style>
 </head>
 <body>
 	<div class="demoTable" >
@@ -59,42 +53,33 @@ Date.prototype.dateToStr = function () {
 </script> -->
 
 	<script type="text/html" id="barDemo">
-		<a class="layui-btn layui-btn-xs" lay-event="toPdfDetail">查看书籍详情</a>
-		<a class="layui-btn layui-btn-xs" lay-event="toPhotoDetail">查看图片详情</a>
+		<a class="layui-btn layui-btn-xs" lay-event="edit">修改权限</a>
   		<%--
-  		<a class="layui-btn layui-btn-xs" lay-event="edit">修改权限</a>
   		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  		
  		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
  		--%>
 	</script>
 
 
 	<script src="layui/layui.js" charset="utf-8"></script>
-<%--<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
- <%
+	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<%-- <%
 	JSONArray json = (JSONArray)request.getAttribute("jsArray");
 %> --%>
-	<%--select标签templet--%>
-	<script type="text/html" id="selectTemplet">
-		<select name="isVIP" lay-filter="testSelect" lay-verify="required" data-value="{{d.isVIP}}"  >
-			<option value="0" title="{{d.userId}}" {{#if(d.isVIP==0){}}selected{{#}}}>否</option>
-			<option value="1" title="{{d.userId}}" {{#if(d.isVIP==1){}}selected{{#}}}>是</option>
-		</select>
-	</script>
 	<script>
-		layui.use(['table','form'], function(){
+		layui.use('table', function(){
 			var table = layui.table;
-			var form = layui.form;
 			table.render({
 				elem: '#test'
 			    ,id: 'testReload'
 			    ,height: 600
-			    ,url:'${pageContext.request.contextPath }/getUsers'
+			    ,url:'http://localhost:8080/ssmAndDl4j/getUsers'
 			    //,data: arr
 			   	,parseData: function(res){ //将原始数据解析成 table 组件所规定的数据，res为从url中get到的数据
 			         var result;
-			         //console.log(this);
-			         //console.log(JSON.stringify(res));
+			         console.log(this);
+			         console.log(JSON.stringify(res));
 			         if(this.page.curr){
 			             result = res.data.slice(this.limit*(this.page.curr-1),this.limit*this.page.curr);
 			         }
@@ -118,23 +103,17 @@ Date.prototype.dateToStr = function () {
 			    ,title: '用户表'
 			    ,even: true //开启隔行背景
 			    ,cols: [[
-			       {type: 'checkbox'}
-			      ,{field:'userId', title:'userId',width:90, sort: true}
+			      {type: 'checkbox', fixed: 'left'}
+			      ,{field:'userId', title:'userId',width:90, fixed: 'left', sort: true}
 			      ,{field:'phonenumber', title:'phoneNumber',width:120}
 			      ,{field:'regDate', title:'regDate',width:120,templet:'<div>{{ layui.util.toDateString(d.regDate, "yyyy-MM-dd") }}</div>'}
-			      ,{field:'isVIP', title:'isVIP',width:90,
-			    	  templet:'#selectTemplet'
-			    	}
+			      ,{field:'isVIP', title:'isVIP',width:90,edit:"text"}
 			      ,{field:'money', title:'money',width:90}
-			      ,{field:'moneyWait', title:'moneyWait',width:120}
+			      ,{field:'moneyWait', title:'moneyWait',width:90}
 			      ,{field:'book', title:'book',width:90}
 			      ,{field:'photo', title:'photo',width:90}
-			      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
+			      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:165}
 			    ]]
-			    ,done: function (res, curr, count) {
-	                $(".layui-table-body, .layui-table-box, .layui-table-cell").css('overflow', 'visible');
-	                form.render();
-	            },
 		    });
   			//头工具栏事件
   			table.on('toolbar(test)', function(obj){
@@ -157,34 +136,12 @@ Date.prototype.dateToStr = function () {
       				break;
     			};
   			});
-  			//监听select选择框
-  			form.on('select(testSelect)', function (data) {
-  				var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
-		  		var value = data.value;
-		 	 	var userId = data.elem[data.elem.selectedIndex].title;
-		  		var url = "${pageContext.request.contextPath }/updatePermission?userId=" + userId + "&value=" + value;
-	      		httpRequest.open('GET', url, true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
-	      		httpRequest.send();//第三步：发送请求  将请求参数写在URL中
-			      /**
-			       * 获取数据后的处理程序
-			       */
-	      		httpRequest.onreadystatechange = function () {
-	          		if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-	              		var json = httpRequest.responseText;//获取到json字符串，还需解析
-	              		if(json=="1"){
-	                  		layer.msg("更新成功");
-	              		} else {
-	            	  		layer.msg("更新失败");
-	              		}
-	         		}
-	      		};
-  	        });
   			//监听单元格编辑
   			table.on('edit(test)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
 		  		var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
 		  		var value = obj.value;
 		 	 	var userId = obj.data.userId;
-		 	 	var url = "${pageContext.request.contextPath }/updatePermission?userId=" + userId + "&value=" + value;
+		  		var url = "http://localhost:8080/ssmAndDl4j/updatePermission?userId=" + userId + "&value=" + value;
 	      		httpRequest.open('GET', url, true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
 	      		httpRequest.send();//第三步：发送请求  将请求参数写在URL中
 			      /**
@@ -205,14 +162,22 @@ Date.prototype.dateToStr = function () {
 	      		};
 			});
 			 //监听工具条
-			   	table.on('tool(test)', function(obj){
+			  /*table.on('tool(test)', function(obj){
 			    var data = obj.data;
-			    if(obj.event === 'toPdfDetail'){
-			    	window.location.href="${pageContext.request.contextPath }/personalPdfList?userId="+data.userId;
-				} else if(obj.event === 'toPhotoDetail'){
-					window.location.href="${pageContext.request.contextPath }/personalPhotoList?userId="+data.userId;
-				} 
+			     
+			    if(obj.event === 'detail'){
+					//var that = this; 
+				  	//多窗口模式，层叠置顶
+				} else if(obj.event === 'del'){
+			      layer.confirm('真的删除行么', function(index){
+			        obj.del();
+			        layer.close(index);
+			      });
+			    } else if(obj.event === 'edit'){
+			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+			    } 
 			  });
+			 */
   			var $ = layui.$, active = {
     		reload: function(){
       			var demoReload = $('#demoReload');

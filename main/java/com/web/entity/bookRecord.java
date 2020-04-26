@@ -1,7 +1,6 @@
 package com.web.entity;
 
 import java.util.Date;
-import java.util.List;
 
 public class bookRecord {
    private long bookrecord;
@@ -9,16 +8,6 @@ public class bookRecord {
    private Integer recpage;
    private Integer recflag;
    private Date recbookdatetime;
-   
-   //bookRecord和bookWord为1对多关系 --刘帅威
-   private List<bookword> bookWords;
-   
-public List<bookword> getBookWords() {
-	return bookWords;
-}
-public void setBookWords(List<bookword> bookWords) {
-	this.bookWords = bookWords;
-}
 public long getBookrecord() {
 	return bookrecord;
 }
@@ -52,7 +41,7 @@ public void setRecbookdatetime(Date recbookdatetime) {
 @Override
 public String toString() {
 	return "bookRecord [bookrecord=" + bookrecord + ", bookid=" + bookid + ", recpage=" + recpage + ", recflag="
-			+ recflag + ", recbookdatetime=" + recbookdatetime + ", bookWords=" + bookWords + "]";
+			+ recflag + ", recbookdatetime=" + recbookdatetime + "]";
 }
    
    
