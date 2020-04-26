@@ -35,19 +35,26 @@
     where book_record = #{bookrecord}
    
   </update> 
-	<select id="bookRecordbyidandpage" parameterType="com.web.entity.bookRecord" resultMap="BaseResultMap">
 
+<select id="bookRecordbyidandpage" parameterType="com.web.entity.bookRecord" resultMap="BaseResultMap">
 		SELECT
 		*
 		from book_record
 		WHERE
 		book_id = #{bookid} and rec_page=#{recflage}
 	</select>
+	
 	<!--根据bookId(书籍Id)和rec_page(页码数)查询是否已经被识别      刘帅威  -->
-  <select id="searchRecognizedBybookIdAndRecPage" resultType="java.lang.Integer">
-    SELECT rec_flag
-    FROM book_record
-    WHERE book_id=#{0} and rec_page=${1}
-  </select>
-
+	<select id="searchRecognizedBybookIdAndRecPage" resultType="java.lang.Integer">
+		SELECT rec_flag
+		FROM book_record
+		WHERE book_id=#{bookId} and rec_page=${recPage}
+	</select>
+	<!--根据bookId查询已识别的页数 刘帅威 -->
+	<select id="getRecognizedPageNumByBookId" resultType="java.lang.Integer">
+		SELECT count(*)
+		FROM book_record
+		WHERE book_id=#{bookId} and rec_flag=1
+	</select>
+	
 </mapper>

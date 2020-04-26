@@ -21,7 +21,6 @@
 <body>
 	<!--幻灯片-->
 	<div>
-
 		<form action="${pageContext.request.contextPath }/fileupload"
 			method="post" enctype="multipart/form-data">
 			<input id="file_upload" type="file" name="file" /> <input

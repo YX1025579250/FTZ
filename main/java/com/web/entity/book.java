@@ -1,6 +1,7 @@
 package com.web.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author lj
@@ -17,7 +18,16 @@ public class book {
    private Date bookdatetime;
    private long bookmoney;
    private long bookbelonging;
-   private Integer moneyflag;///用户自己上传的书为-1，等待确认的是0，已经确认的是1，管理员上传的初始化是2
+   
+   //book和bookRecord为1对多关系 --刘帅威
+   private List<bookRecord> bookRecords;
+   
+public List<bookRecord> getBookRecords() {
+	return bookRecords;
+}
+public void setBookRecords(List<bookRecord> bookRecords) {
+	this.bookRecords = bookRecords;
+}
 public long getBookid() {
 	return bookid;
 }
@@ -74,18 +84,11 @@ public long getBookbelonging() {
 public void setBookbelonging(long bookbelonging) {
 	this.bookbelonging = bookbelonging;
 }
-
-public Integer getMoneyflag() {
-	return moneyflag;
-}
-public void setMoneyflag(Integer moneyflag) {
-	this.moneyflag = moneyflag;
-}
 @Override
 public String toString() {
 	return "book [bookid=" + bookid + ", bookname=" + bookname + ", bookpage=" + bookpage + ", bookurl=" + bookurl
 			+ ", userID=" + userID + ", flag=" + flag + ", bookdatetime=" + bookdatetime + ", bookmoney=" + bookmoney
-			+ ", bookbelonging=" + bookbelonging + ", moneyflag=" + moneyflag + "]";
+			+ ", bookbelonging=" + bookbelonging + ", bookRecords=" + bookRecords + "]";
 }
 
 

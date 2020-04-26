@@ -35,27 +35,21 @@ $(function() {
 						href="${pageContext.request.contextPath }/Index" target="_top">识别平台</a>
 					<a href="${pageContext.request.contextPath }/adminlogin" target="_top">管理平台</a>
 					</div>
-					
-					<ul>
-					
-					 <li><font id ="login2" size="1" color="white">${user.phonenumber },你好</font>
-						</li>
-						<li><a  href="${pageContext.request.contextPath }/logout"  target="_top" id='login1' ><font size="1" color="white">注销</font></a></li>
-</ul>			
 			</div>
 		</div>
 	</div>
 	<script>
 check();
 function check(){
-var ss='${user.adminFlag }';
-if(ss==''||ss=='0')
+var ss='${user.phonenumber }';
+if(ss=='')
 	{
+	document.getElementById('login0').style.display='block';
 	document.getElementById('login1').style.display='none';
 	document.getElementById('login2').style.display='none';
 	}
 else{
-	
+	document.getElementById('login0').style.display='none';
 	document.getElementById('login1').style.display='block';
 	document.getElementById('login2').style.display='block';
 }

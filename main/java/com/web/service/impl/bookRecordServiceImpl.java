@@ -35,9 +35,17 @@ public class bookRecordServiceImpl implements bookRecordService{
 		// TODO Auto-generated method stub
 		return bookrecordDao.bookRecordbyidandpage(bookid, recflage);
 	}
-	public Integer searchRecognizedBybookIdAndRecPage(Long bookId,Integer recPage)
-	{
-		return bookrecordDao.searchRecognizedBybookIdAndRecPage(bookId, recPage);
+	
+	//根据bookId(书籍Id)和rec_page(页码数)查询是否已经被识别 --刘帅威
+	@Override
+	public Integer searchRecognizedBybookIdAndRecPage(Long bookId, Integer recPage) {
+		// TODO Auto-generated method stub
+		return bookrecordDao.searchRecognizedBybookIdAndRecPage(bookId,recPage);
 	}
-	 
+	//根据bookId查询已识别的页码数量
+	@Override
+	public Integer getRecognizedPageNumByBookId(Long bookId) {
+		// TODO Auto-generated method stub
+		return bookrecordDao.getRecognizedPageNumByBookId(bookId);
+	}
 }

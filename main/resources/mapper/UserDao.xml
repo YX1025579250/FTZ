@@ -25,7 +25,8 @@
 	<!-- 根据用户名和密码查询用户记录 -->
 	<select id="checkPhonenumberAndPassword" resultType="Users">
 		SELECT
-		*
+		phonenumber,
+		password
 		FROM
 		users
 		WHERE
@@ -34,7 +35,6 @@
 	<!-- 根据id查询用户详细信息 -->
 	<select id="getUserInfo" resultType="Users">
 		SELECT
-		userID,
 		phonenumber,
 		password,
 		regDate,
@@ -46,10 +46,7 @@
 		sex,
 		age,
 		name,
-		occupation,
-		adminFlag,
-		lastLoginTime,
-		loginNum
+		occupation
 		FROM
 		users
 		WHERE
@@ -57,8 +54,8 @@
 	</select>
 	<!-- 注册用 -->
 	<insert id="saveUser" parameterType="com.web.entity.Users" useGeneratedKeys="true" keyProperty="userId">
-		INSERT INTO users (phonenumber , password,regDate,isVIP,sex,age,name,occupation,money,money_wait,book,photo,adminFlag,lastLoginTime,loginNum)
-		values(#{phonenumber},#{password},#{regDate},#{isVIP},#{sex},#{age},#{name},#{occupation},#{money},#{moneyWait},#{book},#{photo},#{adminFlag},#{lastLoginTime},#{loginNum})
+		INSERT INTO users (phonenumber , password,regDate,isVIP,sex,age,name,occupation)
+		values(#{phonenumber},#{password},#{regDate},#{isVIP},#{sex},#{age},#{name},#{occupation})
 	</insert>
 	
 	<update id="UpdataUser" parameterType="com.web.entity.Users" >
@@ -74,11 +71,7 @@
 		sex= #{sex},
 		age= #{age},
 		name= #{name},
-		occupation= #{occupation} ,
-		adminFlag=#{adminFlag},
-		lastLoginTime= #{lastLoginTime} ,
-		loginNum= #{loginNum}
-		
+		occupation= #{occupation} 
     where userID = #{userId,jdbcType=BIGINT}
   </update> 
 	<select id="getAllUsers" resultType="Users">
@@ -94,19 +87,4 @@
 		</set>
 		where userId=#{userId}
 	</update>
-	<!-- 新增方法，用户每次登录时，更新登录时间和登录次数 -->
-  <update id="UpdataTimeAndNum" parameterType="com.web.entity.Users" >
-    update users
-    set
-		lastLoginTime= #{lastLoginTime} ,
-		loginNum= #{loginNum} 
-    where userID = #{userId}
-  </update> 
-  <!--新增方法，用户登录次数活跃度排名  -->
-  <select id="getRank" resultType="Users">
-		select * from users u order by u.loginNum DESC,u.lastLoginTime DESC
-	</select>
-	
-	
-	
 </mapper>

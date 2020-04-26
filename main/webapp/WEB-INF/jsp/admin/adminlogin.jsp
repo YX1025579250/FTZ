@@ -178,12 +178,7 @@ button{
 	</div>
 </div>
 
-<script type="text/javascript">
-		var msg = "${requestScope.msg }";
-		if(msg!=""){
-			alert(msg)
-		}
-	</script>
+
 <script type="text/javascript">
 function doSubmit(){
 	var form = document.getElementById('fom');

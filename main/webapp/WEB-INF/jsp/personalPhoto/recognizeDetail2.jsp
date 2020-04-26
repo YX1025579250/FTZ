@@ -24,7 +24,7 @@
 			width:600px;
 			height:580px;
 		}
-</style>
+		</style>
 	</head>
 	<body bgcolor="#E6E6FA">
 		<% 
