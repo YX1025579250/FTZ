@@ -174,7 +174,13 @@ public class mainController {
 		model.addAttribute("filename",fileUrl);
 		model.addAttribute("indexValue",indexValue);
 		model.addAttribute("fromList",fromList);
-		model.addAttribute("flag",0);
+		if("photoList".equals(fromList)){//请求来自photoList,置flag为0
+			model.addAttribute("flag",0);
+		} else if("pdfPhotoList".equals(fromList)){
+			model.addAttribute("flag",1);//请求来自pdfPhotoList,置flag为1,传递bookId参数
+			model.addAttribute("bookId",request.getParameter("bookId"));
+		}
+		
 		return "recognize1";
 	}
     //登录界面
@@ -251,27 +257,19 @@ public class mainController {
 		String dir = request.getParameter("dir");
 		JSONArray json = JSONArray.fromObject(ds);
 		SAXWrite.savexml(json,dir);
-		if (flagpdf=="0")
-		{		
-		PhotoRecord photorecord=photorecordService.getPhotoRecordID(dir);
-		//更新识别标记为1
-		photorecord.setRecognized(1);
-		photorecordService.updateRecognized(photorecord);
-		//更新识别标记为1
-		JSONObject jsonOne;
-		 for(int i=0;i<json.size()-1;i++){
-			 jsonOne = json.getJSONObject(i); 
-			 word selectword_id = wordService.selectword_id(String.valueOf(jsonOne.get("word")));
-			 PhotoWord PhotoWord=new PhotoWord();
-			 PhotoWord.setWordId(selectword_id.getWordId());
-			 PhotoWord.setPhotoRecord(photorecord.getRecord());
-			 String wordUrl=new Filemove().filesave((String.valueOf(jsonOne.get("dir"))), String.valueOf(jsonOne.get("word")),userId);
-			 PhotoWord.setWordUrl(wordUrl);
-			 photowordService.savePhotoWord(PhotoWord);
-		 }}
-		else{
-			char page=dir.split("\\.")[0].charAt(dir.split("\\.")[0].length()-1);
-			String bookdir=new String(dir.split("//")[0]+"//"+dir.split("//")[1]+"//"+dir.split("//")[2]);
+		if ("1".equals(flagpdf))
+		{	
+			//System.out.println(dir);
+			//输出类似“123472//PDF//gushi20200421153307940//gushi_1.png”时，后面代码执行正常
+			//输出类似“123472//PDF//gushi20200421153307940/gushi_1.png”时，后面代码报空指针异常
+			//因此改用以下代码来统一格式
+			dir = dir.replaceAll("//", "/");
+			char page = dir.charAt(dir.lastIndexOf(".")-1);
+			String bookdir = dir.substring(0,dir.lastIndexOf("/"));
+			bookdir = bookdir.replaceAll("/", "//");
+			//char page=dir.split("\\.")[0].charAt(dir.split("\\.")[0].length()-1);
+			//String bookdir=new String(dir.split("//")[0]+"//"+dir.split("//")[1]+"//"+dir.split("//")[2]);
+			
 			book book=bookService.selectByurl(bookdir);
 			
             bookRecord bookrecord=bookRecordService.bookRecordbyidandpage(book.getBookid(),Integer.valueOf(String.valueOf(page)));
@@ -289,7 +287,31 @@ public class mainController {
    			 String wordUrl=new Filemove().filesave((String.valueOf(jsonOne.get("dir"))), String.valueOf(jsonOne.get("word")),userId);
    			 bookword.setWordurl(wordUrl);
    			 bookwordService.savebookword(bookword);
-   		 }}
+   		 }
+		}
+		else{
+			PhotoRecord photorecord=photorecordService.getPhotoRecordID(dir);
+			//更新识别标记为1
+			photorecord.setRecognized(1);
+			photorecordService.updateRecognized(photorecord);
+			//更新识别标记为1
+			 System.out.println(json);
+			JSONObject jsonOne;
+			 for(int i=0;i<json.size()-1;i++){
+				
+				 jsonOne = json.getJSONObject(i); 
+				 System.out.println(jsonOne);
+				 System.out.println(String.valueOf(jsonOne.get("word")));
+				 word selectword_id = wordService.selectword_id(String.valueOf(jsonOne.get("word")));
+				 System.out.println(selectword_id);
+				 PhotoWord PhotoWord=new PhotoWord();
+				 PhotoWord.setWordId(selectword_id.getWordId());
+				 PhotoWord.setPhotoRecord(photorecord.getRecord());
+				 String wordUrl=new Filemove().filesave((String.valueOf(jsonOne.get("dir"))), String.valueOf(jsonOne.get("word")),userId);
+				 PhotoWord.setWordUrl(wordUrl);
+				 photowordService.savePhotoWord(PhotoWord);
+			 }
+		}
 		return "sucess";
 	}
 }

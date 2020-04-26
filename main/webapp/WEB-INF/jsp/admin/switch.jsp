@@ -7,20 +7,55 @@
 <link href="Assets/css/css.css" type="text/css" rel="stylesheet" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <script language="javascript">
+var topFrame = parent.document.getElementById('topframe');
+var leftFrame = parent.document.getElementById('leftFrame');
+var barFrame = parent.document.getElementById('leftbar');
+var rightFrame = parent.document.getElementById('rightFrame');
 function switchSysBar(){
- if (parent.document.getElementById('attachucp').cols=="194,12,*"){
- document.getElementById('leftbar').style.display="";
- parent.document.getElementById('attachucp').cols="0,12,*";
+	if(leftFrame.style.width != "0px"){
+		leftFrame.style.width = "0px";
+		barFrame.style.position = "absolute";
+		rightFrame.style.position = "absolute";
+		if(topFrame.style.height == "0px"){
+			barFrame.style.top = "12px";				
+			rightFrame.style.top = "12px";				
+		} else {
+			barFrame.style.top = "107px";				
+			rightFrame.style.top = "107px";				
+		}
+		barFrame.style.left = "0px";
+		rightFrame.style.left = "12px";
+		var width = screen.width - 12;
+		rightFrame.width = width + "px";
+		rightFrame.style.width = width + "px";
+		document.getElementById('leftbar').style.display="";
+		document.getElementById('rightbar').style.display="none";
+	} else {
+		leftFrame.style.width = "194px";
+		barFrame.style.position = "absolute";
+		rightFrame.style.position = "absolute";
+		if(topFrame.style.height == "0px"){
+			leftFrame.style.top = "12px";
+			barFrame.style.top = "12px";				
+			rightFrame.style.top = "12px";				
+		} else {
+			leftFrame.style.top = "107px";				
+			barFrame.style.top = "107px";				
+			rightFrame.style.top = "107px";				
+		} 
+		barFrame.style.left = "194px";
+		rightFrame.style.left = "206px";
+		var width = screen.width - 12 - 194;
+		rightFrame.width = width + "px";
+		rightFrame.style.width = width + "px";
+		document.getElementById('leftbar').style.display="none";
+		document.getElementById('rightbar').style.display="";
+	}
  }
- else{
- parent.document.getElementById('attachucp').cols="194,12,*";
- document.getElementById('leftbar').style.display="none"
- }
-}
 function load(){
- if (parent.document.getElementById('attachucp').cols=="0,12,*"){
- document.getElementById('leftbar').style.display="";
- }
+ 	if (leftFrame.style.width != "0px"){
+ 		document.getElementById('leftbar').style.display="none";
+ 	} 
 }
 </script>
 </head>
@@ -36,15 +71,15 @@ function load(){
 					<td id="leftbar"
 						style="display: none; background: url(Assets/images/main/switchbg.jpg) repeat-y #d2d2d0 0px 0">
 						<a onClick="switchSysBar()" href="javascript:void(0);"> <img
-							src="images/main/pic24.jpg" width="12" height="72" border="0"
-							alt="隐藏左侧菜单">
+							src="Assets/images/main/pic24.jpg" width="12" height="72" border="0"
+							alt="隐藏左侧菜单" title="显示左侧菜单">
 					</a>
 					</td>
 					<td id="rightbar"
 						style="background: url(Assets/images/main/switchbg.jpg) repeat-y #f2f0f5 0px 0">
 						<a onClick="switchSysBar()" href="javascript:void(0);"> <img
 							src="Assets/images/main/pic23.jpg" width="12" height="72"
-							border="0" alt="隐藏左侧菜单">
+							border="0" alt="隐藏左侧菜单" title="隐藏左侧菜单">
 					</a>
 					</td>
 				</tr>

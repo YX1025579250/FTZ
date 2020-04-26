@@ -2,6 +2,7 @@ package com.web.web;
 import com.web.tool.url;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,10 +24,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.web.entity.PhotoRecord;
 import com.web.entity.PhotoWord;
 import com.web.entity.Users;
+import com.web.entity.WordSourceInfo;
+import com.web.entity.book;
 import com.web.service.UserService;
 import com.web.service.photorecordService;
 import com.web.service.photowordService;
 import com.web.service.wordService;
+import com.web.service.bookService;
+import com.web.service.bookRecordService;
 import com.web.util.XmlToJson;
 
 @Controller
@@ -40,6 +45,11 @@ public class personcontroller {
 	@Autowired
 	private photowordService photoWordService;
 
+	@Autowired
+	private bookService bookService;
+	@Autowired
+	private bookRecordService bookRecordService;
+	
 	@RequestMapping("/personmain")
 	public String personmain() {
 		return "person/personmain";
@@ -190,11 +200,23 @@ public class personcontroller {
 	}
 	@RequestMapping("/personalPhotoList")
 	public String personalPhotoList(HttpSession session,HttpServletRequest request){
-		Users user = (Users) session.getAttribute("user");
-		Users u = userService.getUserID(user.getPhonenumber());
-		Long userId = u.getUserId();
+		Long userId ;
+		//判断请求来源
+		if(request.getParameter("userId")==null){//请求来源为用户图片管理，userId从session获得
+			Users user = (Users) session.getAttribute("user");
+			Users u = userService.getUserID(user.getPhonenumber());
+			userId = u.getUserId();
+		} else {//请求来源为管理员查看用户图片详情，userId从request获得
+			userId = Long.parseLong(request.getParameter("userId"));
+		}
 		List<String> urls = photorecordService.personalPhotoList(userId);
-		int indexValue = Integer.parseInt(request.getParameter("indexValue"));
+		int indexValue ;
+		//判断请求参数是否有indexValue
+		if(request.getParameter("indexValue") == null){//没有则表示请求从用户个人中心或管理员平台发出
+			indexValue = 1;//置为默认值1
+		} else {//有则表示请求从用户对未识别的图片进行识别后发出
+			indexValue = Integer.parseInt(request.getParameter("indexValue"));	
+		}
 		request.setAttribute("urls", urls);
 		request.setAttribute("indexValue", indexValue);
 		return "personalPhoto/personalPhotoList";
@@ -213,9 +235,11 @@ public class personcontroller {
 		PhotoRecord temPr = null;
 		List<PhotoWord> pw = null;
 		PhotoWord temPw = null;
+		List<Map<Object,Object>> dataList = new ArrayList<>();
+		Map<Object, Object> map = new HashMap<>();
 		int wordId;
 		if(word == null||word==""||userId==null||userId==""){
-			return "";
+			
 		} else {
 			try {
 				wordId = wordService.getWord(new String(word.getBytes("ISO-8859-1"), "UTF-8")).getWordId();
@@ -224,20 +248,18 @@ public class personcontroller {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		List<Map<Object,Object>> dataList = new ArrayList<>();
-		Map<Object, Object> map = new HashMap<>();
-		Iterator<PhotoWord> iter = pw.iterator();
-		while(iter.hasNext()){
-			temPw = iter.next();
-			temPr = photorecordService.photoRecord(temPw.getPhotoRecord());
-			Map<Object, Object> dataMap = new HashMap<>();
-			dataMap.put("photoWordRecord",temPw.getPhotoWordRecord());
-			dataMap.put("photoRecord",temPw.getPhotoRecord());
-			dataMap.put("dateTime",temPr.getDateTime());
-			dataMap.put("recordUrl",temPr.getRecordUrl());
-			dataMap.put("wordUrl",temPw.getWordUrl());
-			dataList.add(dataMap);
+			Iterator<PhotoWord> iter = pw.iterator();
+			while(iter.hasNext()){
+				temPw = iter.next();
+				temPr = photorecordService.photoRecord(temPw.getPhotoRecord());
+				Map<Object, Object> dataMap = new HashMap<>();
+				dataMap.put("photoWordRecord",temPw.getPhotoWordRecord());
+				dataMap.put("photoRecord",temPw.getPhotoRecord());
+				dataMap.put("dateTime",temPr.getDateTime());
+				dataMap.put("recordUrl",temPr.getRecordUrl());
+				dataMap.put("wordUrl",temPw.getWordUrl());
+				dataList.add(dataMap);
+			}
 		}
 		map.put("code", 0);
 		map.put("msg", "");
@@ -289,4 +311,107 @@ public class personcontroller {
 		//之前的脏数据recognized字段为null
 		return recognized==null?0:recognized;
 	}
+	//从书籍查找文字来源,跳转到searchCharFormPdf.jsp页面
+		@RequestMapping("/searchCharFromPdf")
+		public String searchCharFromPdf(HttpSession session,HttpServletRequest request){
+			Users user = (Users) session.getAttribute("user");
+			Users u = userService.getUserID(user.getPhonenumber());
+			Long userId = u.getUserId();
+			request.setAttribute("userId", userId);
+			return "personalPdf/searchCharFromPdf";
+		}
+		//从书籍查找文字来源，返回json数据
+		@RequestMapping(value = "/searchByUserIdAndWordFromPdf")
+		@ResponseBody
+		public String searchByUserIdAndWordFromPdf(@Param("userId") String userId,@Param("word") String word){
+			List<WordSourceInfo> wsi = new ArrayList<>();;
+			int wordId;
+			Map<Object, Object> map = new HashMap<>();
+			if(word == null||word==""||userId==null||userId==""){
+				
+			} else {
+				try {
+					wordId = wordService.getWord(new String(word.getBytes("ISO-8859-1"), "UTF-8")).getWordId();
+					wsi = bookService.searchWordSource(Long.valueOf(userId), wordId);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			map.put("code", 0);
+			map.put("msg", "");
+			map.put("count", wsi.size());
+			map.put("data", wsi);
+			return JSONObject.toJSONString(map);
+		}
+		//用户个人书籍列表
+		@RequestMapping(value = "/personalPdfList")
+		public String personalPdfList(HttpSession session,HttpServletRequest request){
+			Long userId ;
+			//判断请求来源
+			if(request.getParameter("userId")==null){//请求来源为用户图片管理，userId从session获得
+				Users user = (Users) session.getAttribute("user");
+				Users u = userService.getUserID(user.getPhonenumber());
+				userId = u.getUserId();
+			} else {//请求来源为管理员查看用户图片详情，userId从request获得
+				userId = Long.parseLong(request.getParameter("userId"));
+			}
+			List<book> books = bookService.select(userId);
+			Iterator<book> iter = books.iterator();
+			@SuppressWarnings("rawtypes")
+			List<Map> mapList = new ArrayList<>();
+			while(iter.hasNext()){
+				book tempBook = iter.next();
+				Map<String,Object> bookInfoMap = new HashMap<>();
+				bookInfoMap.put("bookId", tempBook.getBookid());
+				bookInfoMap.put("userId", tempBook.getUserID());
+				bookInfoMap.put("bookName", tempBook.getBookname());
+				bookInfoMap.put("bookPage", tempBook.getBookpage());
+				bookInfoMap.put("bookUrl", tempBook.getBookurl());
+				bookInfoMap.put("flag", tempBook.getFlag());
+				bookInfoMap.put("dateTime", tempBook.getBookdatetime());
+				bookInfoMap.put("bookMoney", tempBook.getBookmoney());
+				//根据bookId查询已识别的页码数量
+				int recognizedPageNum = bookRecordService.getRecognizedPageNumByBookId(tempBook.getBookid());
+				String recognizedProgress = new DecimalFormat("#").format(((double)recognizedPageNum*100)/tempBook.getBookpage());
+				bookInfoMap.put("recognizedProgress", recognizedProgress);
+				int recognizedWordsNum = bookService.getRecognizedWordsNum(tempBook.getBookid());
+				bookInfoMap.put("recognizedWordsNum", recognizedWordsNum);
+				mapList.add(bookInfoMap);
+			}
+			request.setAttribute("userId", userId);
+			request.setAttribute("bookInfoJson", JSONObject.toJSONString(mapList));
+			return "personalPdf/personalPdfList";
+		}
+		//用户个人书籍详情：书籍图片列表
+		@RequestMapping(value = "/pdfDetail")
+		public String pdfDetail(HttpSession session,HttpServletRequest request){
+//			Users user = (Users) session.getAttribute("user");
+//			Users u = userService.getUserID(user.getPhonenumber());
+//			Long userId = u.getUserId();
+			Long bookId = Long.parseLong(request.getParameter("bookId"));
+			book bk = bookService.selectById(bookId);
+			String bookName = bk.getBookname();
+			Integer bookPage = bk.getBookpage();
+			String bookUrl = bk.getBookurl();
+			@SuppressWarnings("rawtypes")
+			List<Map> infoList = new ArrayList<>();
+			for(int i = 1; i <= bookPage ; i++){
+				String tempUrl = "" + bookUrl + "/" + bookName + "_" + i + ".png";
+				Integer tempRecFlag = bookRecordService.searchRecognizedBybookIdAndRecPage(bookId,i);
+				Map<String, Object> infoMap = new HashMap<>();
+				infoMap.put("url", tempUrl);
+				infoMap.put("recFlag", tempRecFlag);
+				infoList.add(infoMap);
+			}
+			if(request.getParameter("indexValue")==null){
+				request.setAttribute("indexValue", 1);
+			} else {
+				request.setAttribute("indexValue", Integer.parseInt(request.getParameter("indexValue")));
+			}
+			request.setAttribute("bookId", bookId);
+			request.setAttribute("infoJson", JSONObject.toJSONString(infoList));
+			
+			return "personalPdf/pdfPhotoList";
+		}
 }

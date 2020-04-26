@@ -1,6 +1,7 @@
 package com.web.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author lj
@@ -17,6 +18,16 @@ public class book {
    private Date bookdatetime;
    private long bookmoney;
    private long bookbelonging;
+   
+   //book和bookRecord为1对多关系 --刘帅威
+   private List<bookRecord> bookRecords;
+   
+public List<bookRecord> getBookRecords() {
+	return bookRecords;
+}
+public void setBookRecords(List<bookRecord> bookRecords) {
+	this.bookRecords = bookRecords;
+}
 public long getBookid() {
 	return bookid;
 }
@@ -77,7 +88,7 @@ public void setBookbelonging(long bookbelonging) {
 public String toString() {
 	return "book [bookid=" + bookid + ", bookname=" + bookname + ", bookpage=" + bookpage + ", bookurl=" + bookurl
 			+ ", userID=" + userID + ", flag=" + flag + ", bookdatetime=" + bookdatetime + ", bookmoney=" + bookmoney
-			+ ", bookbelonging=" + bookbelonging + "]";
+			+ ", bookbelonging=" + bookbelonging + ", bookRecords=" + bookRecords + "]";
 }
 
 

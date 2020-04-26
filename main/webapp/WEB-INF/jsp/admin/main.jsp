@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>主要内容区main</title>
-<link href="css/css.css" type="text/css" rel="stylesheet" />
-<link href="css/main.css" type="text/css" rel="stylesheet" />
-<link rel="shortcut icon" href="images/main/favicon.ico" />
+<link href="Assets/css/css.css" type="text/css" rel="stylesheet" />
+<link href="Assets/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" href="Assets/images/main/favicon.ico" />
 <style>
 body {
 	overflow-x: hidden;
@@ -29,7 +29,7 @@ body {
 
 #main div.top {
 	width: 100%;
-	background: url(images/main/main_r2_c2.jpg) no-repeat 0 10px;
+	background: url(Assets/images/main/main_r2_c2.jpg) no-repeat 0 10px;
 	padding: 0 0 0 15px;
 	line-height: 35px;
 	float: left
@@ -37,7 +37,7 @@ body {
 
 #main div.sec {
 	width: 100%;
-	background: url(images/main/main_r2_c2.jpg) no-repeat 0 15px;
+	background: url(Assets/images/main/main_r2_c2.jpg) no-repeat 0 15px;
 	padding: 0 0 0 15px;
 	line-height: 35px;
 	float: left
@@ -65,7 +65,7 @@ div.main-tit {
 	font-size: 14px;
 	font-weight: bold;
 	color: #4e4e4e;
-	background: url(images/main/main_r4_c2.jpg) no-repeat 0 33px;
+	background: url(Assets/images/main/main_r4_c2.jpg) no-repeat 0 33px;
 	width: 100%;
 	padding: 30px 0 0 20px;
 	float: left
@@ -82,7 +82,7 @@ div.main-corpy {
 	font-size: 14px;
 	font-weight: bold;
 	color: #4e4e4e;
-	background: url(images/main/main_r6_c2.jpg) no-repeat 0 33px;
+	background: url(Assets/images/main/main_r6_c2.jpg) no-repeat 0 33px;
 	width: 100%;
 	padding: 30px 0 0 20px;
 	float: left

@@ -47,22 +47,16 @@ body {
 	<div style="float: left" id="my_menu" class="sdmenu">
 		<div class="collapsed">
 			<span>用户管理</span> 
-			<a href="main.html" target="mainFrame" onFocus="this.blur()">新增用户</a> 
-			<a href="${pageContext.request.contextPath }/userList" target="mainFrame" onFocus="this.blur()">修改用户权限</a>
+			<!-- <a href="main.html" target="mainFrame" onFocus="this.blur()">新增用户</a>  -->
+			<a href="${pageContext.request.contextPath }/userList" target="mainFrame" onFocus="this.blur()">用户信息</a>
 		</div>
 		<div>
-			<span>书籍管理</span> <a href="main.html" target="mainFrame"
-				onFocus="this.blur()">分组权限</a> <a href="main_list.html"
-				target="mainFrame" onFocus="this.blur()">级别权限</a> <a
-				href="main_info.html" target="mainFrame" onFocus="this.blur()">角色管理</a>
-			<a href="main.html" target="mainFrame" onFocus="this.blur()">自定义权限</a>
-		</div>
-		<div>
-			<span>图片管理</span> 
-			<a href="${pageContext.request.contextPath }/table" target="mainFrame" onFocus="this.blur()">图片列表</a> 
-			<a href="${pageContext.request.contextPath }/searchCharAdmin" target="mainFrame" onFocus="this.blur()">查找文字来源</a> 
-			<a href="main_info.html" target="mainFrame" onFocus="this.blur()">角色管理</a>
-			<a href="main.html" target="mainFrame" onFocus="this.blur()">自定义权限</a>
+			<span>书籍/图片管理</span> 
+			<a href="${pageContext.request.contextPath }/pdfList" target="mainFrame" onFocus="this.blur()">书籍管理</a>
+			<a href="${pageContext.request.contextPath }/photoList" target="mainFrame" onFocus="this.blur()">图片管理</a>
+			<%-- <a href="${pageContext.request.contextPath }/table" target="mainFrame" onFocus="this.blur()">图片管理</a> --%>
+			<a href="${pageContext.request.contextPath }/searchCharAdmin" target="mainFrame" onFocus="this.blur()">查找图片文字来源</a>
+			<a href="${pageContext.request.contextPath }/searchCharFromPdfAdmin" target="mainFrame" onFocus="this.blur()">查找书籍文字来源</a>
 		</div>
 		<div>
 			<span>任务管理</span> <a href="main.html" target="mainFrame"

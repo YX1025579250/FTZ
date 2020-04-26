@@ -33,7 +33,6 @@
                 </ul> </li>
         </ul>
     </nav>   
-			、
 		 <div class="pst">
 					<a href="">我的位置</a> - <a href="">识别平台</a>
 				</div>

@@ -7,6 +7,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		
+		<!-- 将xml转为JSON对象 -->
+		<script src="Assets/js/xml2json.js"></script>
+		<script src="Assets/js/jszip.min.js"></script>
+		<script src="Assets/js/FileSaver.js"></script>
+		<link rel="stylesheet" href="layui/css/layui.css" media="all">
 		<style type="text/css">
 			body{
 			  background:#AEEEEE url() no-repeat left top;
@@ -60,7 +66,7 @@
 
 			 
 			#prve {
-				background: url(http://localhost:8080/FTZ/previous_64.png);
+				background: url(Assets/images/previous_64.png);
 				height: 62px;
 				width: 36px;
 				display: inline-block;
@@ -70,7 +76,7 @@
 			}
 			 
 			#next {
-				background: url(http://localhost:8080/FTZ/next_64.png);
+				background: url(Assets/images/next_64.png);
 				height: 62px;
 				width: 36px;
 				display: inline-block;
@@ -79,12 +85,12 @@
 				cursor: pointer;
 			}
 		</style>
-		<link rel="stylesheet" href="layui/css/layui.css" media="all">
+		
 	</head>
  
 	<body>
 		<div id="bigPhoto">
-			<img id="bigPhotoSrc" src="http://localhost:8080/FTZ/notFound.jpg" width="1080" height="768" border="0" 
+			<img id="bigPhotoSrc" src="Assets/images/notFound.jpg" width="1080" height="768" border="0"  
 			data-method="setTop"/>
 		</div>
 		<div id="smallPhotos">
@@ -102,7 +108,7 @@
 			};
 			//定义数据
 			eg.data = [];
-			eg.rootUrl = "http://localhost:8080/FTZ/";
+			eg.rootUrl = "/FTZ/";
 			<%
 			List<String> urls = (List)request.getAttribute("urls");
 			for(String currentValue : urls){
@@ -182,7 +188,7 @@
 			setTop: function(){
 				var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
 				var photoSrc = this.src;
-				var url = "http://localhost:8080/ssmAndDl4j/selectRecognized?photoSrc=" + photoSrc;
+				var url = "${pageContext.request.contextPath }/selectRecognized?photoSrc=" + photoSrc;
 		        httpRequest.open('GET', url, true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
 		        httpRequest.send();//第三步：发送请求  将请求参数写在URL中
 		        /**
@@ -194,21 +200,78 @@
 		                //console.log(json);
 		                if(json=="1"){
 			  			  	//多窗口模式，层叠置顶
-			  			  	layer.open({
+			  			  	parent.layer.open({
 				  				type: 2 //此处以iframe举例
 				  				,title: '图片识别详情'
 				  				,area: ['1215px', '700px']
 				  				,shade: 0
 				  				,maxmin: true
 				  				,offset: 'auto' 
-				  				,content: 'http://localhost:8080/ssmAndDl4j/recognizeDetail2?photoSrc=' + photoSrc
-				  				,btn: ['全部关闭'] //只是为了演示
-				  				,yes: function(){
-				  					layer.closeAll();
+			  					,moveOut: true
+				  				,content: '${pageContext.request.contextPath }/recognizeDetail2?photoSrc=' + photoSrc
+				  				,btn: ['下载图片和文字','全部关闭'] //只是为了演示
+				  				,yes: function(){//下载图片和文字
+				  					//取得xml文件路径
+				  					var xmlSrc = photoSrc.substring(0,photoSrc.lastIndexOf(".")) + ".xml";
+				  					function loadXMLDoc(dname) {
+				  					    if (window.XMLHttpRequest) {
+				  					        xhttp=new XMLHttpRequest();
+				  					    }
+				  					    else {
+				  					        xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  					    }
+				  					    xhttp.open("GET",dname,false);
+				  					    xhttp.send();
+				  					    return xhttp.responseXML;
+				  					}
+				  					var xmlDoc = loadXMLDoc(xmlSrc);
+				  					var x2js = new X2JS();
+				  					var jsonObj = x2js.xml2json(xmlDoc);//xml2json
+				  					var jsonData = jsonObj.wordandpoints;
+				  					//处理jsonData得到wordData
+				  					var wordData = "";
+				  					for(var i=0;i<jsonData.point.length;i++){
+				  						wordData+=(jsonData.point[i].word + " ");
+				  					}
+				  					// 初始化一个zip打包对象
+				  					var zip = new JSZip();
+				  					// 创建一个被用来打包的名为Hello.txt的文件
+				  					zip.file("word.txt", wordData +"\n");
+				  					var img = photoSrc;
+				  					var ext = img.substring(img.lastIndexOf(".")+1).toLowerCase();
+					  				//var img = "http://127.0.0.1/base64/1.jpg";
+					  				function getBase64Image(img) {
+					  				  var canvas = document.createElement("canvas");
+					  				  canvas.width = img.width;
+					  				  canvas.height = img.height;
+					  				  var ctx = canvas.getContext("2d");
+					  				  ctx.drawImage(img, 0, 0, img.width, img.height);
+					  				  var dataURL = canvas.toDataURL("image/"+ext);
+					  				  return dataURL;
+					  				}
+					  				var image = new Image();
+					  				image.crossOrigin = '';
+					  				image.src = img;
+					  				image.onload = function(){
+					  				  	var base64 = getBase64Image(image);
+					  				  	var imgData = base64.split(",")[1];
+					  				 	//console.log(imgData);
+					  					// 创建一个base64数据为imgData的图像，图像名是smile.gif
+					  					zip.file("photo." + ext, imgData, {base64: true});
+					  					// 把打包内容异步转成blob二进制格式
+					  					zip.generateAsync({type:"blob"}).then(function(content) {
+					  					    // content就是blob数据，这里以example.zip名称下载    
+					  					    // 使用了FileSaver.js  
+					  					    saveAs(content, "data.zip");
+					  					});
+					  				};
+				  				}
+				  				,btn2: function(){
+				  					parent.layer.closeAll();
 				  				}
 				  				,zIndex: layer.zIndex //重点1
 				  				,success: function(layero){
-				  				  layer.setTop(layero); //重点2
+				  					parent.layer.setTop(layero); //重点2
 				  				}
 				  			});
 		                } else {
@@ -217,8 +280,8 @@
 		                		,content:'该图片未识别下载，是否现在进行识别？'
 		                		,btn:['是','否']
 		                		,yes:function(){
-		                			window.location.href="http://localhost:8080/ssmAndDl4j/afterwardRecognized?photoSrc="
-		                					+ photoSrc + "&indexValue=" + eg.indexValue + "&fromList=true";
+		                			window.location.href="${pageContext.request.contextPath }/afterwardRecognized?photoSrc="
+	                					+ photoSrc + "&indexValue=" + eg.indexValue + "&fromList=photoList";
 		                		}
 		                		,btn2:function(){
 		                			
