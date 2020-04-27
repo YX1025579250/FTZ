@@ -77,7 +77,7 @@ Date.prototype.dateToStr = function () {
     elem: '#test'
     ,id: 'testReload'
     ,height: 600
-    ,url:'${pageContext.request.contextPath }/searchByUserId'
+    ,url:'http://localhost:8080/ssmAndDl4j/searchByUserId'
     //,data: arr
    	,parseData: function(res){ //将原始数据解析成 table 组件所规定的数据，res为从url中get到的数据
          var result;
@@ -144,24 +144,23 @@ Date.prototype.dateToStr = function () {
     if(obj.event === 'detail'){
     	//var that = this; 
 		  //多窗口模式，层叠置顶
-		 parent.layer.open({
+		  layer.open({
 			type: 2 //此处以iframe举例
 			,title: '图片识别详情'
 			,area: ['1215px', '700px']
 			,shade: 0
 			,maxmin: true
 			,offset: 'auto' 
-			,moveOut: true
-			,content: '${pageContext.request.contextPath }/recognizeDetail2?photoSrc=/FTZ/'+data.recordUrl
+			,content: 'http://localhost:8080/ssmAndDl4j/recognizeDetail2?photoSrc=http://localhost:8080/FTZ/'+data.recordUrl
 			,btn: ['全部关闭'] //只是为了演示
 			,yes: function(){
-				parent.layer.closeAll();
+				layer.closeAll();
 			}
 			
 			
 			,zIndex: layer.zIndex //重点1
 			,success: function(layero){
-				parent.layer.setTop(layero); //重点2
+			  layer.setTop(layero); //重点2
 			}
 		  });
     	//window.location.href="http://localhost:8080/ssmAndDl4j/recognizeDetail?photoSrc="+data.recordUrl;

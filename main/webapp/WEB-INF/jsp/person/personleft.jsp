@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>左侧导航menu</title>
-<link href="Assets/css/css.css" type="text/css" rel="stylesheet" />  
+<link href="Assets/css/css.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="Assets/js/sdmenu.js"></script>
 <script type="text/javascript">
 	// <![CDATA[
@@ -53,17 +53,18 @@ body {
 		</div>
 		<div>
 			<span>书籍/图片管理</span> 
-			<a href="${pageContext.request.contextPath }/personalPdfList" target="mainFrame" onFocus="this.blur()">书籍管理</a> 
-			<a href="${pageContext.request.contextPath }/personalPhotoList" target="mainFrame" onFocus="this.blur()">图片管理</a>
-			<a href="${pageContext.request.contextPath }/searchChar" target="mainFrame" onFocus="this.blur()">查找图片文字来源</a>
-			<a href="${pageContext.request.contextPath }/searchCharFromPdf" target="mainFrame" onFocus="this.blur()">查找书籍文字来源</a>
+			<a href="main.html" target="mainFrame" onFocus="this.blur()">我的书籍/图片下载</a> 
+			<a href="main_list.html" target="mainFrame" onFocus="this.blur()">书籍管理</a> 
+			<a href="${pageContext.request.contextPath }/personalPhotoList?indexValue=1" target="mainFrame" onFocus="this.blur()">查看图片</a>
+			<a href="${pageContext.request.contextPath }/searchChar" target="mainFrame" onFocus="this.blur()">查找文字来源</a>
 		</div>
 		<div>
-			<span>任务管理</span> <a href="pdfrenwu" target="mainFrame"
-				onFocus="this.blur()">任务发布/领取</a> <a href="main_list.html"
-				target="mainFrame" onFocus="this.blur()">我的任务/管理</a> <a
-				href="main_info.html" target="mainFrame" onFocus="this.blur()">任务发布</a>
-		</div>
+		
+			<span>任务管理</span> 
+			
+			<a href="${pageContext.request.contextPath }/TaskManageList?flag=0" target="mainFrame" onFocus="this.blur()">任务领取</a>
+			<!-- <a href="pdfrenwu" target="mainFrame" onFocus="this.blur()">任务领取</a> -->
+			 <a href="${pageContext.request.contextPath }/TaskManageList?flag=1" target="mainFrame" onFocus="this.blur()">我的任务</a> 
 		<div>
 			<span>留言管理</span> <a href="main.html" target="mainFrame"
 				onFocus="this.blur()">我的留言/回复</a> <a href="main_list.html"

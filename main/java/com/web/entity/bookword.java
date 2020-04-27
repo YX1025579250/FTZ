@@ -1,26 +1,12 @@
 package com.web.entity;
 
+import java.util.Date;
 
 public class bookword {
 	   private long bookwordid;
 	   private Integer wordid;
 	   private long record;
 	   private String wordurl;
-	   
-	   
-	   public bookword() {
-		super();
-		// TODO Auto-generated constructor stub
-	   }
-
-	public bookword(long bookwordid, Integer wordid, long record, String wordurl) {
-		super();
-		this.bookwordid = bookwordid;
-		this.wordid = wordid;
-		this.record = record;
-		this.wordurl = wordurl;
-	}
-	
 	public long getBookwordid() {
 		return bookwordid;
 	}
@@ -46,11 +32,5 @@ public class bookword {
 		this.wordurl = wordurl;
 	}
 
-	@Override
-	public String toString() {
-		return "bookword [bookwordid=" + bookwordid + ", wordid=" + wordid + ", record=" + record + ", wordurl="
-				+ wordurl + "]";
-	}
-	
-	   
+
 }

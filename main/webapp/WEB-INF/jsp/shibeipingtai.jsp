@@ -15,24 +15,26 @@
 
 <body>
 	<%@ include file="head.jsp"%>
+
+
 	<div class="scd_bg">
 		<div class="scd clearfix">
 			<div class="s_head clearfix">
 			<nav>
-        <ul>
-            <li><a href="#">书籍识别</a>
+			    <ul>
+			    	<li><a href="#">书籍识别</a>
                 <ul>
                     <li><a id="pdf" href="${pageContext.request.contextPath }/pdfIndex1"   class="" target="myiframe">书籍上传</a></li>
                     <li><a href="${pageContext.request.contextPath }/pdfIndex2" target="myiframe">已上传书籍识别</a></li>
-                    <li><a href="#">书籍任务识别</a></li>
+                    <li><a href="${pageContext.request.contextPath }/pdfIndex3" target="myiframe">书籍任务识别</a></li>
                 </ul> 
             </li>
             <li><a href="#">图片识别</a>
              <ul>
                     <li><a id="img" href="${pageContext.request.contextPath }/recognize"   target="myiframe">图片上传</a></li>
                 </ul> </li>
-        </ul>
-    </nav>   
+		        </ul>
+		    </nav>   
 		 <div class="pst">
 					<a href="">我的位置</a> - <a href="">识别平台</a>
 				</div>
@@ -60,7 +62,7 @@
 	<%@ include file="foot.jsp"%>
 	<script src="Assets/js/smoove.js"></script>
 	<script type="text/javascript" src="Assets/js/jquery-1.7.2(1).js"></script>
-	
+
 </body>
 <style type="text/css">
 nav {

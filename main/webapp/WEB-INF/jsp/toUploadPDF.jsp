@@ -226,7 +226,7 @@ function change(obj){
 			       		 +datas[i].bookname+'"id="bookname" name="bookname" />'
 			       		 +' <div style="position:relative;width:400px;height:528px;left: 100px;" >'
 			            	 +'<img src="'+obj.src+'" style="height:528px;width:400px"  />'
-			            	+'<div id ="idSubmit" style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();" >'+"未识别(点击识别)"+'</div>'			            	
+			            	+'<div id ="idSubmit" style="cursor:pointer;position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();" >'+"未识别(点击识别)"+'</div>'+'</div>'			            	
 			            	+'</form>';
 				}else{
 					str='<form method="get" action=""> <input type="hidden" value="'
@@ -235,7 +235,7 @@ function change(obj){
 			       		 +datas[i].bookname+'"id="bookname" name="bookname" />'
 			       		 +' <div style="position:relative;width:400px;height:528px;left: 100px;" >'
 				       		+'<img src="'+obj.src+'" style="height:528px;width:400px"  />'
-			            	+'<div style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:50px" >'+"已识别(无法点击)"+'</div>'		            	
+			            	+'<div style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:50px" >'+"已识别(无法点击)"+'</div>'+'</div>'		            	
 			            	+'</form>';
 				}
 				 
@@ -272,7 +272,7 @@ function init () {
 		        	//+'<input type="image" style="height:528px;width:400px"  src="'+thumb1.src+'" οnclick="document.formName.submit()"  id="topImg'
 		        	 +'<img src="'+thumb1.src+'" style="height:528px;width:400px"  />'
 		        	//+datas[0].user+datas[0].bookurl+datas[0].recpage+'"/>'
-		        	+'<div  id ="idSubmit" style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();" >'+"未识别(点击识别)"+'</div>'
+		        	+'<div  id ="idSubmit" style="cursor:pointer; position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();" >'+"未识别(点击识别)"+'</div>'+'</div>'
 		        	
 		        	+'</form>';
 		}else{
@@ -284,7 +284,7 @@ function init () {
 		   		 +'<img src="'+thumb1.src+'" style="height:528px;width:400px"  />'
 		        	//+'<input type="image" style="height:528px;width:400px"  src="'+thumb1.src+'" id="topImg'
 		        	//+datas[0].user+datas[0].bookurl+datas[0].recpage+'"/>'
-		        	+'<div style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:50px" >'+"已识别(无法点击)"+'</div>'
+		        	+'<div style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:50px" >'+"已识别(无法点击)"+'</div>'+'</div>'
 		        	+'</form>';
 		}
 		
