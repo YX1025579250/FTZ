@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.entity.WordSourceInfo;
 import com.web.entity.book;
 import com.web.service.bookService;
 import com.web.dao.bookDao;
@@ -45,6 +46,32 @@ public class bookServiceImpl implements bookService{
 	}
 	
 	    //保存书籍信息
+	
+	//根据userId和wordId查询文字来源信息 --刘帅威
+	@Override
+	public List<WordSourceInfo> searchWordSource(Long userId, int wordId) {
+		// TODO Auto-generated method stub
+		return bookDao.selectByUserIdAndWordId(userId, wordId);
+	}
+	
+	//根据bookID查询书籍中已识别的文字个数 --刘帅威
+	@Override
+	public Integer getRecognizedWordsNum(Long bookId) {
+		// TODO Auto-generated method stub
+		return bookDao.getRecognizedWordsNum(bookId);
+	}
+	//查询所有book信息 --刘帅威
+	@Override
+	public List<book> selectAll() {
+		// TODO Auto-generated method stub
+		return bookDao.selectAll();
+	}
+	//管理员查找文字来源--刘帅威
+	@Override
+	public List<WordSourceInfo> searchWordSourceAdmin(int wordId) {
+		// TODO Auto-generated method stub
+		return bookDao.selectByWordId(wordId);
+	}
 	@Override
 	public List<book> selectByBookBelonging(Long bookbelonging)
 	{

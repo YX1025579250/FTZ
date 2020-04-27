@@ -71,17 +71,27 @@
 
 <script type="text/javascript"> 
 function LoadDivs(flg) {
+
     var s = null;
+
     document.getElementById("loadDiv").style.display = flg == true ? "block" : "none";      
+
     if (flg) {
+
         var index = 0;
+
         var text = ["正在验证数据，请稍后！", "正在连接消息服务器，请稍后！", "正在加载数据，请稍后！"];
+
         s = setInterval(function () {
+
             document.getElementById("loadText").innerText = text[index] || "正在验证数据，请稍后！";
             index++;
             if (index > text.length - 1) {
+
                 index = 0;
+
             }
+
         }, 2000);
     } else {
         if (s != null && s != undefined) {
@@ -116,7 +126,6 @@ formData.append(type,$("#fileName1")[0].files[0]);
 formData.append("fname",document.getElementById('fname').value);
 formData.append("lname",document.getElementById('lname').value);
 formData.append("phonenumber",document.getElementById('phonenumber').value);
-
 $.ajax({
 	type : "post",
 	url : "${pageContext.request.contextPath}/adminaddpdf",
@@ -138,3 +147,4 @@ $.ajax({
 </script> 
 
 </html>
+

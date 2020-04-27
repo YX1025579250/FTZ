@@ -39,5 +39,4 @@ public interface UsersDao {
 	boolean UpdataTimeAndNum(@Param("lastLoginTime")String lastLoginTime,@Param("loginNum")Integer loginNum,@Param("userId")Long userId);
 	//活跃度排名
 	List<Users> getRank();
-
 }

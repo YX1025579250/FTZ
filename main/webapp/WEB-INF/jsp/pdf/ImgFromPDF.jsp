@@ -184,7 +184,7 @@ function change(obj){
 			       		 +datas[i].bookname+'"id="bookname" name="bookname" />'
 			       		 +' <div style="position:relative;width:450px;height:550px;left: 350px;" >'
 			            	+'<input type="image"  style="width:450px;height:550px"  src="'+obj.src+'" οnclick="document.formName.submit()" id="topImg'
-			            	+datas[i].bookurl+datas[i].recpage+'"/>'
+			            	+datas[i].user+datas[i].bookurl+datas[i].recpage+'"/>'
 			            	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"未识别"+'</div>'+'</div>'
 			            	+'</form>';
 				}else{
@@ -230,7 +230,7 @@ function init () {
 		   		 +datas[0].bookname+'"id="bookname" name="bookname" />'
 		   		 +' <div style="position:relative;width:450px;height:550px;left: 350px;" >'
 		        	+'<input type="image" style="width:450px;height:550px"  src="'+thumb1.src+'" οnclick="document.formName.submit()" id="topImg'
-		        	+datas[0].bookurl+datas[0].recpage+'"/>'
+		        	+datas[0].user+datas[0].bookurl+datas[0].recpage+'"/>'
 		        	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"未识别"+'</div>'+'</div>'
 		        	+'</form>';
 		}else{

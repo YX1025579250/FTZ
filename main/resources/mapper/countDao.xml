@@ -12,4 +12,4 @@
 	<select id="selectTotalOfWord" resultMap="contentResultMap">
 		   select pw.word_id ,count(*) as total,w.word from photo_word pw left join word w on pw.word_id=w.word_id GROUP BY pw.word_id ORDER BY total DESC
 	</select>
-</mapper>
+</mapper> 

@@ -77,8 +77,7 @@
 		occupation= #{occupation} ,
 		adminFlag=#{adminFlag},
 		lastLoginTime= #{lastLoginTime} ,
-		loginNum= #{loginNum}
-		
+		loginNum= #{loginNum} 
     where userID = #{userId,jdbcType=BIGINT}
   </update> 
 	<select id="getAllUsers" resultType="Users">
@@ -106,7 +105,5 @@
   <select id="getRank" resultType="Users">
 		select * from users u order by u.loginNum DESC,u.lastLoginTime DESC
 	</select>
-	
-	
 	
 </mapper>

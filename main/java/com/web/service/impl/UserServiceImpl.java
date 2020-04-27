@@ -117,9 +117,8 @@ public class UserServiceImpl implements UserService {
 		
 		return userDao.UpdataUser(user);
 	}  
-	
 	@Override
-	
+
 	public boolean UpdataTimeAndNum(String lastLoginTime, Integer loginNum, Long userId) {
 		// TODO Auto-generated method stub
 		return userDao.UpdataTimeAndNum(lastLoginTime, loginNum, userId);
@@ -129,6 +128,5 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.getRank();
 	}
-
 
 }

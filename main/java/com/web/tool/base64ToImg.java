@@ -1,5 +1,5 @@
 package com.web.tool;
- 
+
 import java.io.File;
 import java.io.FileOutputStream;  
 
@@ -37,5 +37,5 @@ public class base64ToImg {
     		  return false;
     		 }
     }
-    
-}
+
+} 

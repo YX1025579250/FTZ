@@ -79,7 +79,7 @@
 		userID = #{userId}
 		ORDER BY
 		record
-		
+		desc
 	</select>
 	
 </mapper>

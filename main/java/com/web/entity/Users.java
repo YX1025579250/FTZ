@@ -1,6 +1,6 @@
 package com.web.entity;
 
-
+import java.util.List;
 
 public class Users {
 	private Long userId;
@@ -19,6 +19,25 @@ public class Users {
    private Integer adminFlag;
    private String lastLoginTime;
    private Integer loginNum;
+   
+
+//关联user和book，1对多 --刘帅威
+   private List<book> books;
+   //关联user和photoRecord，1对多 --刘帅威
+   private List<PhotoRecord> photoRecords;
+   
+	public List<book> getBooks() {
+	return books;
+	}
+	public void setBooks(List<book> books) {
+		this.books = books;
+	}
+	public List<PhotoRecord> getPhotoRecords() {
+		return photoRecords;
+	}
+	public void setPhotoRecords(List<PhotoRecord> photoRecords) {
+		this.photoRecords = photoRecords;
+	}
 	public Long getUserId() {
 		return userId;
 	}
@@ -73,12 +92,8 @@ public class Users {
 	public void setPhoto(Integer photo) {
 		this.photo = photo;
 	}
-	public Integer getAdminFlag() {
-		return adminFlag;
-	}
-
 	public Users(Long userId, String password, String phonenumber, String regDate, Integer isVIP, Double money,
-			Double moneyWait, Integer book, Integer photo,Integer sex,String occupation,Integer age,String name,Integer adminFlag) {
+			Double moneyWait, Integer book, Integer photo,Integer sex,String occupation,Integer age,String name,Integer adminFlag,String lastLoginTime,Integer loginNum) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -94,9 +109,39 @@ public class Users {
 		this.age = age;
 		this.name = name;
 		this.adminFlag=adminFlag;
+		this.lastLoginTime=lastLoginTime;
+		this.loginNum=loginNum;
 		
 	}
-
+	
+	public Users(Long userId, String password, String phonenumber, String regDate, Integer isVIP, Double money,
+			Double moneyWait, Integer book, Integer photo, Integer sex, Integer age, String name, String occupation,Integer adminFlag,String lastLoginTime,Integer loginNum,
+			List<com.web.entity.book> books, List<PhotoRecord> photoRecords) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.phonenumber = phonenumber;
+		this.regDate = regDate;
+		this.isVIP = isVIP;
+		this.money = money;
+		this.moneyWait = moneyWait;
+		this.book = book;
+		this.photo = photo;
+		this.sex = sex;
+		this.age = age;
+		this.name = name;
+		this.adminFlag=adminFlag;
+		this.lastLoginTime=lastLoginTime;
+		this.loginNum=loginNum;
+		this.occupation = occupation;
+		this.books = books;
+		this.photoRecords = photoRecords;
+	}
+//	private Integer sex;
+//	   private String occupation;
+//	   private Integer age;
+//	   private String name;
+//	   private Date birthday;
 	public Integer getSex() {
 		return sex;
 	}
@@ -121,13 +166,12 @@ public class Users {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Integer getAdminFlag() {
+		return adminFlag;
+	}
 	public void setAdminFlag(Integer adminFlag) {
 		this.adminFlag = adminFlag;
 	}
-	public Users() {
-		super();
-	}
-	
 	public String getLastLoginTime() {
 		return lastLoginTime;
 	}
@@ -140,15 +184,18 @@ public class Users {
 	public void setLoginNum(Integer loginNum) {
 		this.loginNum = loginNum;
 	}
+	public Users() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", password=" + password + ", phonenumber=" + phonenumber + ", regDate="
 				+ regDate + ", isVIP=" + isVIP + ", money=" + money + ", moneyWait=" + moneyWait + ", book=" + book
 				+ ", photo=" + photo + ", sex=" + sex + ", age=" + age + ", name=" + name + ", occupation=" + occupation
-				+ ", adminFlag=" + adminFlag + ", lastLoginTime=" + lastLoginTime + ", loginNum=" + loginNum + "]";
+				+ ", adminFlag=" + adminFlag + ", lastLoginTime=" + lastLoginTime + ", loginNum=" + loginNum
+				+ ", books=" + books + ", photoRecords=" + photoRecords + "]";
 	}
 	
-	
-	
+		
 
 }

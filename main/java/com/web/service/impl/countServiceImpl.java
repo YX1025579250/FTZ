@@ -11,7 +11,7 @@ import com.web.service.countService;
 
 @Service
 public class countServiceImpl implements countService {
-	
+
 	@Autowired
 	private countDao countDao;
 	@Override

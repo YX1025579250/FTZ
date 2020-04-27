@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -19,6 +19,7 @@
 <!-- 滚动图片用到的css -->
 	<style type="text/css">
 			
+
 			ul,li {
 				list-style: none;
 				/*设置标签样式为无,默认值为disc实心圆,circle为空心圆,square为实心方块*/
@@ -28,6 +29,7 @@
 				width: 1150px;
 				text-align:center;
 			}
+
 			#smallPhotos {
 				width: 1150px;
 				margin: 10px 0;
@@ -46,19 +48,23 @@
 				margin-left: 9px;
 				/*左边距10px*/
 			}
+
 			.init {
 				border: 3px solid #FFFFFF;
 				cursor: pointer;
 			}
+
 			.currentPhoto{
 				border: 3px solid red;
 				cursor: pointer;
 			} 
+
 			#smallPhotosList img:hover {
 				border: 3px solid #66CD00;
 				cursor: pointer;
 				/* 鼠标样式*/
 			}
+
 			 
 			#prve {
 				background: url(http://localhost:8080/FTZ/previous_64.png);
@@ -89,7 +95,7 @@
 		<input type="hidden" value="${requestScope.bookid}"
 			id="bookid" name="bookid" />
 	 <div id="bigPhoto">
-
+	
 		<form method="get" action="#">
 	   		<input type="hidden" value=""
 	   				id="user" name="user" />
@@ -103,9 +109,9 @@
 				    <input type="image" style="height:768px;width:1080px"  src="http://localhost:8080/FTZ/notFound.jpg"  id="bigPhotoSrc"/>
 				    <div style="position:absolute;width:1080px;height:50px;color: #66CD00; z-indent:2;top:0;">文字</div>
 					</div>
-
+	  				
 	   	</form>
-
+   	
 	</div>
 	<div id="cupage"></div>
 	<div id="smallPhotos">
@@ -126,12 +132,15 @@ eg.data = [];
 eg.rootUrl = "/FTZ/";
 eg.groupValue = 1;
 eg.groupSize = 7; //每组的数量
+
+
 function preGroup(){
 	if(eg.groupValue>1){
 		eg.groupValue -= 1;
 		showThumb(eg.groupValue);
 	}
 }
+
 function nextGroup(){
 	if(eg.groupValue<datas.length/eg.groupSize){
 		eg.groupValue += 1;
@@ -139,9 +148,11 @@ function nextGroup(){
 	}
 }
  
+
 function showThumb(group) {
 	var span= eg.$("smallPhotos");
 	span.innerHTML = '';
+
 	var start = (group - 1) * eg.groupSize; //计算需要的data数据开始位置
 	var end = group * eg.groupSize; //计算需要的data数据开始位置
 	if (datas.length>0)
@@ -157,6 +168,7 @@ function showThumb(group) {
 		ul.appendChild(li); //追加元素
 	}
 };
+
 function change(obj){
 	var ul = eg.$("bigPhoto");
 	ul.innerHTML = ''; //每次显示时清空旧的内容
@@ -169,17 +181,17 @@ function change(obj){
 				var str='';
 				if(datas[i].recflag==0)
 				{
-					str='<form method="get" id="formSubmit" action="${pageContext.request.contextPath }/uploadImgOfpdf"> <input type="hidden" value="'
+					str='<form method="get"  id="formSubmit"  action="${pageContext.request.contextPath }/uploadImgOfpdf"> <input type="hidden" value="'
 			       		 +datas[i].bookurl+'"id="bookurl" name="bookurl" /> <input type="hidden" value="'
 			       		 +datas[i].recpage+'"id="recpage" name="recpage" /><input type="hidden" value="'
 			       		 +datas[i].bookname+'"id="bookname" name="bookname" />'
 			       		 +' <div style="position:relative;width:450px;height:550px;left: 350px;" >'
-			            	+'<input   type="image"  style="width:450px;height:550px"  src="'+obj.src+'"  onclick="document.formName.submit()" id="topImg'
+			            	+'<input type="image"  style="width:450px;height:550px"  src="'+obj.src+'" onclick="document.formName.submit()" id="topImg'
 			            	+datas[i].user+datas[i].bookurl+datas[i].recpage+'"/>'
-			            	+'<div  id ="idSubmit" style="cursor:pointer; position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();" >'+"未识别(点击识别)"+'</div>'+'</div>'
+			            	+'<div id ="idSubmit"  style="cursor:pointer;position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();" >'+"未识别(点击识别)"+'</div>'+'</div>'
 			            	+'</form>';
 				}else{
-					str='<form method="get" action=""> <input type="hidden" value="'
+					str='<form method="get"   id="formSubmit"  action=""> <input type="hidden" value="'
 			       		 +datas[i].bookurl+'"id="bookurl" name="bookurl" /> <input type="hidden" value="'
 			       		 +datas[i].recpage+'"id="recpage" name="recpage" /><input type="hidden" value="'
 			       		 +datas[i].bookname+'"id="bookname" name="bookname" />'
@@ -197,6 +209,7 @@ function change(obj){
 		}
 	
 }
+
 function init () {
 	showThumb(1); //初始化显示内容
 	var thumb1 = eg.$("0")
@@ -214,9 +227,9 @@ function init () {
 		   		 +datas[0].recpage+'"id="recpage" name="recpage" /><input type="hidden" value="'
 		   		 +datas[0].bookname+'"id="bookname" name="bookname" />'
 		   		 +' <div style="position:relative;width:450px;height:550px;left: 350px;" >'
-		        	+'<input type="image"   style="width:450px;height:550px"  src="'+thumb1.src+'"  onclick="document.formName.submit()"  id="topImg'
-		        	+datas[0].bookurl+datas[0].recpage+'"/>'
-		        	+'<div  id ="idSubmit" style="cursor:pointer; position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();" >'+"未识别(点击识别)"+'</div>'+'</div>'
+		        	+'<input type="image" style="width:450px;height:550px"  src="'+thumb1.src+'" onclick="document.formName.submit()" id="topImg'
+		        	+datas[0].user+datas[0].bookurl+datas[0].recpage+'"/>'
+		        	+'<div id ="idSubmit" style="cursor:pointer;position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:30px" onClick="document.forms[\'formSubmit\'].submit();"  >'+"未识别(点击识别)"+'</div>'+'</div>'
 	            	+'</form>';
 		}else{
 		 	str='<form method="get" action=""><input type="hidden" value="'
@@ -233,6 +246,8 @@ function init () {
 		   $("#bigPhoto").append(str);
 	}
 };
+
+
 $(document).ready(function () {
     var datass=[];
 	$.ajax({
@@ -255,4 +270,6 @@ $(document).ready(function () {
             }
         });
 });
+
+
 </script>

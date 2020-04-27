@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.io.BufferedReader"%>
+	<%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.*,com.web.entity.Users"%>
@@ -9,9 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>主要内容区main</title>
-<link href="css/css.css" type="text/css" rel="stylesheet" />
-<link href="css/main.css" type="text/css" rel="stylesheet" />
-<link rel="shortcut icon" href="images/main/favicon.ico" />
+<link href="Assets/css/css.css" type="text/css" rel="stylesheet" />
+<link href="Assets/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" href="Assets/images/main/favicon.ico" />
 <style>
 body {
 	overflow-x: hidden;
@@ -33,7 +33,7 @@ body {
 
 #main div.top {
 	width: 100%;
-	background: url(images/main/main_r2_c2.jpg) no-repeat 0 10px;
+	background: url(Assets/images/main/main_r2_c2.jpg) no-repeat 0 10px;
 	padding: 0 0 0 15px;
 	line-height: 35px;
 	float: left
@@ -41,7 +41,7 @@ body {
 
 #main div.sec {
 	width: 100%;
-	background: url(images/main/main_r2_c2.jpg) no-repeat 0 15px;
+	background: url(Assets/images/main/main_r2_c2.jpg) no-repeat 0 15px;
 	padding: 0 0 0 15px;
 	line-height: 35px;
 	float: left
@@ -69,7 +69,7 @@ div.main-tit {
 	font-size: 14px;
 	font-weight: bold;
 	color: #4e4e4e;
-	background: url(images/main/main_r4_c2.jpg) no-repeat 0 33px;
+	background: url(Assets/images/main/main_r4_c2.jpg) no-repeat 0 33px;
 	width: 100%;
 	padding: 30px 0 0 20px;
 	float: left
@@ -86,7 +86,7 @@ div.main-corpy {
 	font-size: 14px;
 	font-weight: bold;
 	color: #4e4e4e;
-	background: url(images/main/main_r6_c2.jpg) no-repeat 0 33px;
+	background: url(Assets/images/main/main_r6_c2.jpg) no-repeat 0 33px;
 	width: 100%;
 	padding: 30px 0 0 20px;
 	float: left
@@ -99,24 +99,6 @@ div.main-order {
 </style>
 </head>
 <body>
-	<%-- <%
-		Users u = (Users)session.getAttribute("user");
-		String path ="D:\\FTZ\\"+u.getPhonenumber().toString()+"\\temp.txt";   // 这边文件目录需改成相对路径
-		File file = new File(path);
-		FileReader fr = new FileReader(file);  //字符输入流
-		BufferedReader br = new BufferedReader(fr);  //使文件可按行读取并具有缓冲功能
-		StringBuffer strB = new StringBuffer();   //strB用来存储jsp.txt文件里的内容
-		String str = br.readLine();
-		while(str!=null){
-			strB.append(str).append("<br>");   //将读取的内容放入strB
-			str = br.readLine();
-		}
-		br.close();    //关闭输入流
-	%>
-	
-	<center>
-		<%=strB %>
-	</center>  --%>
 
 	<!--main_top-->
 	<table width="99%" border="0" cellspacing="0" cellpadding="0" id="main">

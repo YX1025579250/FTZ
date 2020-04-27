@@ -1,5 +1,7 @@
 package com.web.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,11 @@ public class bookwordServiceImpl implements bookwordService{
 		// TODO Auto-generated method stub
 		return bookwordDao.savebookword(bookword);
 	}
-
+	
+	//根据bookRecord查询bookWord --刘帅威
+	@Override
+	public List<bookword>  getByBookRecord(Long record) {
+		// TODO Auto-generated method stub
+		return bookwordDao.getByBookRecord(record);
+	}
 }

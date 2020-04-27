@@ -57,7 +57,7 @@ public class countController {
 				count item = totalList.get(i);
 				dataSet.setValue(item.getTotal(), item.getWord(), item.getWord());
 			}
-				
+
 		} 
 		//创建一个JFreeChart图表
 		JFreeChart chart = ChartFactory.createBarChart("统计图","汉字", "汉字数", dataSet, PlotOrientation.VERTICAL,false, true, false);

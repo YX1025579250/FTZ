@@ -35,5 +35,5 @@ public class count {
 	public String toString() {
 		return "count [wordId=" + wordId + ", total=" + total + ", word=" + word + "]";
 	}
-	
+
 }

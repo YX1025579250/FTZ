@@ -235,7 +235,7 @@ function change(obj){
 			       		 +datas[i].bookname+'"id="bookname" name="bookname" />'
 			       		 +' <div style="position:relative;width:400px;height:528px;left: 100px;" >'
 				       		+'<img src="'+obj.src+'" style="height:528px;width:400px"  />'
-			            	+'<div style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:50px" >'+"已识别(无法点击)"+'</div>'+'</div>'		            	
+			            	+'<div style="position:absolute;width:400px;height:528px;color: #66CD00; z-indent:2;top:0;line-height: 528px;text-align: center;font-size:50px" >'+"已识别(无法点击)"+'</div>'+'</div>'            	
 			            	+'</form>';
 				}
 				 
