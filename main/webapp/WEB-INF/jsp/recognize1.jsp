@@ -13,6 +13,12 @@
 	rel="stylesheet">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<style>
+		/* 在个人中心进行识别时高度溢出，看不到识别和下载按钮，所以在底部加了100px高度的div代替溢出 */
+		#uselessDiv{
+			height:100px;
+		}
+	</style>
 </head>
 <body>
 <div id="doing" >
@@ -29,7 +35,8 @@
 		<header class="header">
 			<p>定位</p>
 		</header>
-
+        <input type="hidden" value="${requestScope.flag}"
+			id="flagpdf" name="flagpdf" />
 		<input type="hidden" value="${requestScope.filename}"
 			id="ChangePhotoName" name="photoname" />
 		
@@ -83,7 +90,13 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="uselessDiv">
+	<h4><b>说明：</b></h4>
+	<p>使用鼠标对红框进行调整；</p>
+	<p>点击“识别”，等待系统出现提示后点击“确定”；</p>
+	<p>使用鼠标对识别后的文字进行修改</p>
+	<p>点击“下载”，下载txt识别文件。</p>
+	</div>
 	<script src="Assets/js/jquery-3.0.0.min.js"></script>
 	<script src="Assets/js/layui.js"></script>
 	<script src="Assets/js/download.js"></script>
@@ -556,11 +569,21 @@ window.onload=function(){
 		$.ajax({
             type:"POST",
             url:"${pageContext.request.contextPath }/download",
-            data: {dat:json,dir:text},
+            data: {dat:json,dir:text,flagpdf:document.getElementById("flagpdf").value},
             success:function(data){
             	if (data='sucess'){download(text1, "dlText.txt", "text/plain");}
             	else{
             	download(text1, "dlText.txt", "text/plain");}
+				if("${fromList}"==null){
+            		
+            	} else if("${fromList}"=="photoList"){//识别请求从用户查看图片发出，跳回到图片列表界面
+            		window.location.href="${pageContext.request.contextPath }/personalPhotoList?indexValue="
+            			+ "${indexValue}";	
+            	} else if("${fromList}"=="pdfPhotoList"){//识别请求从用户查看书籍图片发出，跳回到书籍图片列表界面
+            		console.log("*****************"+"${indexValue}");
+            		window.location.href="${pageContext.request.contextPath }/pdfDetail?indexValue="
+            			+ "${indexValue}" + "&bookId=" + "${bookId}";	
+            	}
             }
         });
 			

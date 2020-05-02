@@ -67,7 +67,7 @@
 
 			 
 			#prve {
-				background: url(http://localhost:8080/FTZ/previous_64.png);
+				background: url(/FTZ/previous_64.png);
 				height: 62px;
 				width: 36px;
 				display: inline-block;
@@ -77,7 +77,7 @@
 			}
 			 
 			#next {
-				background: url(http://localhost:8080/FTZ/next_64.png);
+				background: url(/FTZ/next_64.png);
 				height: 62px;
 				width: 36px;
 				display: inline-block;
@@ -104,7 +104,7 @@
 	   		 <input type="hidden" value=""
 	  				id="bookname" name="bookname" />
 	  				<div style="position:relative;width:1080px;height:768px;" >
-				    <input type="image" style="height:768px;width:1080px"  src="http://localhost:8080/FTZ/notFound.jpg"  id="bigPhotoSrc"/>
+				    <input type="image" style="height:768px;width:1080px"  src="/FTZ/notFound.jpg"  id="bigPhotoSrc"/>
 				    <div style="position:absolute;width:1080px;height:50px;color: #66CD00; z-indent:2;top:0;">文字</div>
 					</div>
 	  				
@@ -130,7 +130,7 @@ eg.$ = function(id) {
 };
 //定义数据
 eg.data = [];
-eg.rootUrl = "http://localhost:8080/FTZ/";
+eg.rootUrl = "/FTZ/";
 eg.groupValue = 1;
 eg.groupSize = 7; //每组的数量
 
@@ -185,7 +185,7 @@ function change(obj){
 			       		 +' <div style="position:relative;width:450px;height:550px;left: 350px;" >'
 			            	+'<input type="image"  style="width:450px;height:550px"  src="'+obj.src+'" οnclick="document.formName.submit()" id="topImg'
 			            	+datas[i].user+datas[i].bookurl+datas[i].recpage+'"/>'
-			            	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"未识别"+'</div>'
+			            	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"未识别"+'</div>'+'</div>'
 			            	+'</form>';
 				}else{
 					str='<form method="get" action=""> <input type="hidden" value="'
@@ -197,7 +197,7 @@ function change(obj){
 				       		+'<img src="'+obj.src+'" style="width:450px;height:550px"   />'
 			            	//+'<input type="image"  style="height:528px;width:400px" src="'+obj.src+'" id="topImg'
 			            	///+datas[i].user+datas[i].bookurl+datas[i].recpage+'"/>'
-			            	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"已识别"+'</div>'
+			            	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"已识别"+'</div>'+'</div>'
 			            	+'</form>';
 				}
 				 
@@ -231,7 +231,7 @@ function init () {
 		   		 +' <div style="position:relative;width:450px;height:550px;left: 350px;" >'
 		        	+'<input type="image" style="width:450px;height:550px"  src="'+thumb1.src+'" οnclick="document.formName.submit()" id="topImg'
 		        	+datas[0].user+datas[0].bookurl+datas[0].recpage+'"/>'
-		        	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"未识别"+'</div>'
+		        	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"未识别"+'</div>'+'</div>'
 		        	+'</form>';
 		}else{
 		 	str='<form method="get" action=""> <input type="hidden" value="'
@@ -243,7 +243,7 @@ function init () {
 		   		 +'<img src="'+thumb1.src+'" style="width:450px;height:550px"  />'
 		        	//+'<input type="image" style="height:528px;width:400px"  src="'+thumb1.src+'" id="topImg'
 		        	//+datas[0].user+datas[0].bookurl+datas[0].recpage+'"/>'
-		        	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"已识别"+'</div>'
+		        	+'<div style="position:absolute;width:450px;height:50px;color: #66CD00; z-indent:2;top:0;">'+"已识别"+'</div>'+'</div>'
 		        	+'</form>';
 		}
 		

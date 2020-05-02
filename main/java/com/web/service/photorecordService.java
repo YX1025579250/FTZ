@@ -22,4 +22,5 @@ public interface photorecordService {
 	PhotoRecord photoRecord(Long record);
 	//根据用户id获取所有图片记录
 	List<PhotoRecord> photoRecords(Long userId);
+	List<PhotoRecord> getPhotoRecordByUserId(Long userId);
 }

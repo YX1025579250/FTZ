@@ -59,5 +59,12 @@ public class photorecordServiceImpl implements photorecordService{
 		// TODO Auto-generated method stub
 		return photorecordDao.selectRecognized(jpgname);
 	}
+	
+	@Override
+	
+	public List<PhotoRecord> getPhotoRecordByUserId(Long userId)
+	{
+		return photorecordDao.getPhotoRecordByUserId(userId);
+	}
 
 }

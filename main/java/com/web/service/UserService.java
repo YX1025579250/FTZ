@@ -28,6 +28,11 @@ public interface UserService {
 	//更新用户权限
 	boolean UpdatePassword(Users user);
 	//更新用户信息或修改密码
+
 	boolean updateMoney(Long userId,Double value);
 	//更新用户积分
+
+	boolean UpdataTimeAndNum(@Param("lastLoginTime")String lastLoginTime,@Param("loginNum")Integer loginNum,@Param("userId")Long userId);
+	//活跃度排名
+	List<Users> getRank();
 }
