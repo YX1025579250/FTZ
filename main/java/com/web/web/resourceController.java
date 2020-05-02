@@ -160,7 +160,22 @@ public class resourceController {
 	}
 	
 	@RequestMapping("/resourcedownload")
-	public ResponseEntity<byte[]> resourcedownload(HttpServletRequest request,Long resourceId) throws Exception{
+	public ResponseEntity<byte[]> resourcedownload(HttpSession session,HttpServletRequest request,Long resourceId) throws Exception{
+		Users user = (Users) session.getAttribute("user");
+		Users u = us.getUserID(user.getPhonenumber());
+		Long userId = u.getUserId();
+		Double umoney = user.getMoney();
+		Double credit = rs.getResourceCredit(resourceId);
+		us.updateMoney(userId, umoney-credit);
+		user.setMoney(umoney-credit);
+		System.out.println(user.getMoney());
+		session.setAttribute("user", user);
+		
+		Long ruserId = rs.getUserId(resourceId);
+		Users r = us.getUserInfo(ruserId);
+		Double rmoney = r.getMoney();
+		us.updateMoney(ruserId, rmoney+credit);
+		
 		String path = url.dir;
 		Resource resource = rs.getResource(resourceId);
 		String fileName = resource.getResourceUrl();

@@ -21,4 +21,12 @@
 		insert into resource(userId,resourceName,resourceDescription,resourceUrl,resourceCredit)
 		values(#{userId},#{resourceName},#{resourceDescription},#{resourceUrl},#{resourceCredit})
 	</insert>
+	
+	<select id="getResourceCredit" resultType="Double">
+		select resourceCredit from resource where resourceId = #{resourceId}
+	</select>
+	
+	<select id="getUserId" resultType="Long">
+		select userId from resource where resourceId = #{resourceId}
+	</select>
 </mapper>

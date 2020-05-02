@@ -96,7 +96,14 @@ layui.use('table', function(){
     var data = obj.data;
     //console.log(obj)
     if(obj.event === 'download'){
-      window.location.href="resourcedownload?resourceId="+data.resourceId;
+    	if("${user.money}" >= data.resourceCredit){
+    		alert("${user.money}");
+    		window.open("resourcedownload?resourceId="+data.resourceId);
+    		//window.location.href="resourcedownload?resourceId="+data.resourceId;
+    		window.location.href="resource";
+    	}else{
+    		alert("积分不足");
+    	}
     } 
   });
   

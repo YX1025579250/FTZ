@@ -116,6 +116,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		
 		return userDao.UpdataUser(user);
+	}
+	@Override
+	public boolean updateMoney(Long userId, Double value) {
+		// TODO Auto-generated method stub
+		return userDao.updateMoney(userId, value);
 	}  
 
 }

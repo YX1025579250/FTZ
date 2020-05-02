@@ -34,4 +34,7 @@ public interface UsersDao {
 	//修改权限
 	boolean UpdataUser(Users user);
 	//更新用户信息或修改密码
+	boolean updateMoney(@Param("userId")Long userId,@Param("value")Double value);
+	//更新用户积分
+
 }

@@ -58,4 +58,16 @@ public class resourceServiceImpl implements resourceService{
 		}
 	}
 
+	@Override
+	public Double getResourceCredit(Long resourceId) {
+		// TODO Auto-generated method stub
+		return rdao.getResourceCredit(resourceId);
+	}
+
+	@Override
+	public Long getUserId(Long resourceId) {
+		// TODO Auto-generated method stub
+		return rdao.getUserId(resourceId);
+	}
+
 }

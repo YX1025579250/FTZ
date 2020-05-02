@@ -49,7 +49,7 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
       	<tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="center" valign="middle" class="borderright borderbottom">${list.replyId }</td>
         <td align="center" valign="middle" class="borderright borderbottom">${list.userId }</td>
-        <td align="center" valign="middle" class="borderright borderbottom">${list.resourceId }</td>
+        <td align="center" valign="middle" class="borderright borderbottom">${list.replyContent }</td>
         <td align="center" valign="middle" class="borderright borderbottom">${list.replyDatestr }</td>
         <td align="center" valign="middle" class="borderbottom">
         	<a href="${pageContext.request.contextPath }/resourcedetail?resourceId=${list.resourceId }" target="_parent" onFocus="this.blur()" class="add">查看</a>
