@@ -28,6 +28,7 @@ public interface UserService {
 	//更新用户权限
 	boolean UpdatePassword(Users user);
 	//更新用户信息或修改密码
+
 	boolean updateMoney(Long userId,Double value);
 	//更新用户积分
 

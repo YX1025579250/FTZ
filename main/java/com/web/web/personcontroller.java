@@ -80,27 +80,27 @@ public class personcontroller {
 
 
 ​		
-		map.put("phonenumber",userInfo.getPhonenumber());    
-		map.put("password",userInfo.getPassword());
-		map.put("regDate",userInfo.getRegDate());
-		map.put("isVIP",userInfo.getIsVIP().toString());
-		map.put("money",userInfo.getMoney().toString());
-		map.put("money_wait",userInfo.getMoneyWait().toString());
-		map.put("book",userInfo.getBook().toString());
-		map.put("photo",userInfo.getPhoto().toString());
+​		map.put("phonenumber",userInfo.getPhonenumber());    
+​		map.put("password",userInfo.getPassword());
+​		map.put("regDate",userInfo.getRegDate());
+​		map.put("isVIP",userInfo.getIsVIP().toString());
+​		map.put("money",userInfo.getMoney().toString());
+​		map.put("money_wait",userInfo.getMoneyWait().toString());
+​		map.put("book",userInfo.getBook().toString());
+​		map.put("photo",userInfo.getPhoto().toString());
 //		private long userid;
 //		   private String sex;
 //		   private String occupation;
 //		   private long id;
 //		   private Integer age;
 //		   private String name;
-		if(userInfo.getSex()==1)
-			map.put("sex","男");
-		else if(userInfo.getSex()==0)
-			map.put("sex","女");
-		else
-			map.put("sex","非法读取，请重新设置性别");
-		
+​		if(userInfo.getSex()==1)
+​			map.put("sex","男");
+​		else if(userInfo.getSex()==0)
+​			map.put("sex","女");
+​		else
+​			map.put("sex","非法读取，请重新设置性别");
+​		
 		if(userInfo.getAge()==0)
 			map.put("age","非法读取，请重新设置年龄");
 		else
@@ -342,6 +342,7 @@ public class personcontroller {
 //		}
 //		return "personalPhoto/recDetail";
 //	}
+
 	@RequestMapping("/recognizeDetail2")
 	public String show(HttpServletRequest request) throws JSONException, IOException{
 		String photoSrc = request.getParameter("photoSrc");
@@ -382,7 +383,7 @@ public class personcontroller {
 		request.getRequestDispatcher("/personreply?page=1&size=10").forward(request, response);
 		return;
 	}
-	
+
 	@RequestMapping("/personfeedback")
 	public String personfeedback(HttpSession session,HttpServletRequest request,int page,int size){
 		Users user = (Users) session.getAttribute("user");
@@ -420,7 +421,7 @@ public class personcontroller {
 		request.getRequestDispatcher("/personfeedback?page=1&size=10").forward(request, response);
 		return; 
 	}
-
+	
 	//从书籍查找文字来源,跳转到searchCharFormPdf.jsp页面
 		@RequestMapping("/searchCharFromPdf")
 		public String searchCharFromPdf(HttpSession session,HttpServletRequest request){

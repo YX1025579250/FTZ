@@ -94,12 +94,12 @@
 		where userId=#{userId}
 	</update>
 
-	
+
 	<update id="updateMoney" parameterType="Users">
 		update users set money = #{value}
 		where userId=#{userId}
 	</update>
-
+	
 	<!-- 新增方法，用户每次登录时，更新登录时间和登录次数 -->
   <update id="UpdataTimeAndNum" parameterType="com.web.entity.Users" >
     update users
@@ -112,5 +112,4 @@
   <select id="getRank" resultType="Users">
 		select * from users u order by u.loginNum DESC,u.lastLoginTime DESC
 	</select>
-
 </mapper>
