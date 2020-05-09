@@ -34,7 +34,13 @@ public interface UsersDao {
 	//修改权限
 	boolean UpdataUser(Users user);
 	//更新用户信息或修改密码
+
 	boolean updateMoney(@Param("userId")Long userId,@Param("value")Double value);
 	//更新用户积分
 
+
+	//更新用户登录时间和次数
+	boolean UpdataTimeAndNum(@Param("lastLoginTime")String lastLoginTime,@Param("loginNum")Integer loginNum,@Param("userId")Long userId);
+	//活跃度排名
+	List<Users> getRank();
 }

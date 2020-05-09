@@ -67,4 +67,14 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!-- 显示jfreechart图表用 -->
+	<servlet>
+		<servlet-name>DisplayChart</servlet-name>
+		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayChart</servlet-name>
+		<url-pattern>/chart</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

@@ -122,5 +122,16 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.updateMoney(userId, value);
 	}  
+	@Override
+
+	public boolean UpdataTimeAndNum(String lastLoginTime, Integer loginNum, Long userId) {
+		// TODO Auto-generated method stub
+		return userDao.UpdataTimeAndNum(lastLoginTime, loginNum, userId);
+	}
+	@Override
+	public List<Users> getRank() {
+		// TODO Auto-generated method stub
+		return userDao.getRank();
+	}
 
 }

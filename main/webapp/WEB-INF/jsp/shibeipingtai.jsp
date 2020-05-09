@@ -15,17 +15,26 @@
 
 <body>
 	<%@ include file="head.jsp"%>
-	<!-- <div class="banner banner_s"><img src="Assets/upload/banner_b.jpg" alt=""/></div>
- -->
-	<!--幻灯片-->
-	<!--主体盒子-->
-
 	<div class="scd_bg">
 		<div class="scd clearfix">
 			<div class="s_head clearfix">
-				<a id="pdf" href="javascript:void(0);" onclick="js_method_pdf() " class="">pdf识别</a> <a id="img" href="javascript:void(0);"   class="on">图片上传识别</a>
-				<div class="pst">
-					<a href="">首页</a> - <a href="">识别平台</a>
+			<nav>
+        <ul>
+            <li><a href="#">书籍识别</a>
+                <ul>
+                    <li><a id="pdf" href="${pageContext.request.contextPath }/pdfIndex1"   class="" target="myiframe">书籍上传</a></li>
+                    <li><a href="${pageContext.request.contextPath }/pdfIndex2" target="myiframe">已上传书籍识别</a></li>
+                    <li><a href="${pageContext.request.contextPath }/pdfIndex3" target="myiframe">书籍任务识别</a></li>
+                </ul> 
+            </li>
+            <li><a href="#">图片识别</a>
+             <ul>
+                    <li><a id="img" href="${pageContext.request.contextPath }/recognize"   target="myiframe">图片上传</a></li>
+                </ul> </li>
+        </ul>
+    </nav>   
+		 <div class="pst">
+					<a href="">我的位置</a> - <a href="">识别平台</a>
 				</div>
 			</div>
 			<div class="scd_m clearfix">
@@ -49,35 +58,74 @@
 	</div>
 
 	<%@ include file="foot.jsp"%>
-
-	<script type="text/javascript">
-	     function js_method_pdf(){
-	    	 var divp = document.getElementById('pdf');
-	    	 //div.setAttribute("className", "on");
-	    	 var divi = document.getElementById('img');
-	    	 var iframeSrc = document.getElementById('myrame');
-	    	 if(divp.innerText=="pdf识别")
-	    	 {
-	    		 
-	    		 divp.innerText = "图片上传识别";
-		    	 divi.innerText = "pdf识别";
-		    	 
-		    	 iframeSrc.src="${pageContext.request.contextPath }/pdfIndex";
-		    	 
-	    	 }else
-    		 {
-	    		 divp.innerText = "pdf识别";
-		    	 divi.innerText = "图片上传识别";
-		    	 iframeSrc.src="${pageContext.request.contextPath }/recognize";
-    		 }
-	     }
-	</script>
 	<script src="Assets/js/smoove.js"></script>
 	<script type="text/javascript" src="Assets/js/jquery-1.7.2(1).js"></script>
-	<!-- <script type="text/javascript" src="Assets/js/js_z.js"></script>
-<!-- <script type="text/javascript">
-
-</script> -->
+	
 </body>
+<style type="text/css">
+nav {
+    margin:1px auto;
+    text-align:left;
+}
+nav ul {
+    border-radius:0px;
+    background:linear-gradient(to bottom,#efefef,#bbbbbb);
+    padding:0 1px;
+    display:inline-table;
+    position:relative;  
+    box-shadow:1px 1px 3px #666;
+}
+nav ul ul {
+    display:none;
+}
+nav ul li {
+    float:left; 
+}
+nav ul::after {
+    content:"";
+    display:block;
+    clear:both;
+}
+nav ul li a {
+    display:block;
+    padding:1px 1px;
+    color:#000;
+    text-decoration:none;
+    font-family:"微软雅黑";
+}
+nav ul li:hover > ul {
+    display:block;
+}
+nav ul li:hover {
+    background:linear-gradient(to bottom,#4f5964,#5f6975);
+}
+nav ul li:hover a {
+    color:#FFF;
+}
+nav ul ul {
+    background:#5f6975;
+    border-radius:0;
+    position:absolute;
+    top:100%;
+    padding:0;
+}
+nav ul ul li {
+    float:none;
+    border-top:1px solid #6b727c;
+    border-bottom:1px solid #575f6a;
+}
+nav ul ul li a {
+    color:#FFF;
+}   
+nav ul ul li a:hover {
+    background:#4b545f;
+}
+nav ul ul ul {
+    width:100%;
+    position:absolute;
+    left:100%;
+    top:10%;
+}
+</style>
 </html>
 

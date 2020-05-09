@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>主要内容区main</title>
-<link href="css/css.css" type="text/css" rel="stylesheet" />
-<link href="css/main.css" type="text/css" rel="stylesheet" />
-<link rel="shortcut icon" href="images/main/favicon.ico" />
+<link href="Assets/css/css.css" type="text/css" rel="stylesheet" />
+<link href="Assets/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" href="Assets/images/main/favicon.ico" />
 <style>
 body {
 	overflow-x: hidden;
@@ -29,7 +29,7 @@ body {
 
 #main div.top {
 	width: 100%;
-	background: url(images/main/main_r2_c2.jpg) no-repeat 0 10px;
+	background: url(Assets/images/main/main_r2_c2.jpg) no-repeat 0 10px;
 	padding: 0 0 0 15px;
 	line-height: 35px;
 	float: left
@@ -37,7 +37,7 @@ body {
 
 #main div.sec {
 	width: 100%;
-	background: url(images/main/main_r2_c2.jpg) no-repeat 0 15px;
+	background: url(Assets/images/main/main_r2_c2.jpg) no-repeat 0 15px;
 	padding: 0 0 0 15px;
 	line-height: 35px;
 	float: left
@@ -65,7 +65,7 @@ div.main-tit {
 	font-size: 14px;
 	font-weight: bold;
 	color: #4e4e4e;
-	background: url(images/main/main_r4_c2.jpg) no-repeat 0 33px;
+	background: url(Assets/images/main/main_r4_c2.jpg) no-repeat 0 33px;
 	width: 100%;
 	padding: 30px 0 0 20px;
 	float: left
@@ -82,7 +82,7 @@ div.main-corpy {
 	font-size: 14px;
 	font-weight: bold;
 	color: #4e4e4e;
-	background: url(images/main/main_r6_c2.jpg) no-repeat 0 33px;
+	background: url(Assets/images/main/main_r6_c2.jpg) no-repeat 0 33px;
 	width: 100%;
 	padding: 30px 0 0 20px;
 	float: left
@@ -98,14 +98,14 @@ div.main-order {
 	<!--main_top-->
 	<table width="99%" border="0" cellspacing="0" cellpadding="0" id="main">
 		<tr>
-			<td colspan="2" align="left" valign="top"><span class="time"><strong>上午好！admin</strong><u>[超级管理员]</u></span>
+			<td colspan="2" align="left" valign="top"><span class="time"><strong>上午好！${user.phonenumber}</strong><u>[超级管理员]</u></span>
 				<div class="top">
-					<span class="left">您上次的登灵时间：2012-05-03 12:00 登录IP：127.0.0.1
+					<span class="left">您上次的登灵时间：${user.lastLoginTime} 登录IP：127.0.0.1
 						&nbsp;&nbsp;&nbsp;&nbsp;如非您本人操作，请及时</span><a href="index.html"
 						target="mainFrame" onFocus="this.blur()">更改密码</a>
 				</div>
 				<div class="sec">
-					这是您第<span class="num">80</span>次,登录！
+					这是您第<span class="num">>${user.loginNum+1}</span>次登录！在所有用户中活跃度位列第<span class="num">${rank }</span>名！
 				</div></td>
 		</tr>
 		<tr>
